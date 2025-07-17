@@ -1,0 +1,174 @@
+
+/* -----------------------------
+   TYPOGRAPHY & FONT CONTROL
+------------------------------*/
+
+body {
+  font-family: 'Times New Roman', serif;
+  color: #f5f5c2;
+  background-color: #000000;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #f5d442;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+
+/* -----------------------------
+   HEADER & NAVIGATION
+------------------------------*/
+
+.header-title {
+  background-color: #000000;
+  padding: 0.2rem 0;
+}
+
+.header-title h2 {
+  font-size: 2em;
+  margin: 0;
+  line-height: 1.1;
+  color: #f5d442;
+}
+
+.topnav {
+  background-color: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem 0;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: #f5d442;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  font-family: 'Times New Roman', serif;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #111111;
+  min-width: 200px;
+  z-index: 1;
+  border: 1px solid #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: #f5d442;
+}
+
+.dropdown-content a:hover {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+/* -----------------------------
+   CONTENT ZONES & BANNERS
+------------------------------*/
+
+.container {
+  padding-top: 0;
+}
+
+.center-content {
+  background-color: #111111;
+  padding: 0.6rem 1rem;
+  margin-top: 0;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+
+/* -----------------------------
+   TEXT STYLES
+------------------------------*/
+
+.main-line {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #f5d442;
+  display: block;
+  line-height: 1.2;
+}
+
+.sub-line {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #f5d442;
+  display: block;
+  line-height: 1.2;
+}
+
+.gold-text {
+  color: #f5d442;
+}
+
+.gold-small {
+  font-size: 1.1em;
+  color: #f5d442;
+}
+
+.white-text {
+  color: #ffffff;
+}
+
+.section-divider {
+  border-bottom: 1px solid #444;
+  margin: 1.5rem auto;
+  width: 80%;
+}
+
+
+/* -----------------------------
+   OPTIONAL UTILITIES
+------------------------------*/
+
+.glow-border {
+  border: 1px solid #f5d442;
+  box-shadow: 0 0 8px #f5d442;
+}
+
+.shadow-box {
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+}
+
+.bg-darker {
+  background-color: #0a0a0a;
+}
+
+.bg-light {
+  background-color: #111111;
+}
+
+.no-padding {
+  padding: 0 !important;
+}

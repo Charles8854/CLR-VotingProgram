@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLR Presidential Ballot - Preferential Voting</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Ballot Specific Styles */
+        .ballot-section {
+            background-color: var(--secondary-dark);
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .ballot-header {
+            background-color: #333;
+            color: #ffec99;
+            padding: 0.6rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 2px solid #ffec99;
+            text-align: center;
+        }
+
+        .instructions {
+            background-color: var(--tertiary-dark);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .candidate-list {
+            margin: 1.5rem 0;
+        }
+
+        .candidate-item {
+            display: grid;
+            grid-template-columns: 80px 1fr 150px auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .candidate-item:hover {
+            background-color: var(--tertiary-dark);
+        }
+
+        .vote-input {
+            width: 60px !important;
+            text-align: center;
+            padding: 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--tertiary-dark);
+            color: var(--text-light);
+        }
+
+        .candidate-name {
+            font-weight: bold;
+        }
+
+        .party-affiliation {
+            color: var(--accent-gold);
+        }
+
+        .candidate-link {
+            text-align: right;
+        }
+
+        .section-divider {
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+            padding-top: 1rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin: 1.5rem 0;
+        }
+
+        /* Button Styles */
+        .submit-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-direction: column;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .candidate-item {
+                grid-template-columns: 60px 1fr;
+                gap: 0.5rem;
+                padding: 1rem 0.5rem;
+            }
+
+            .party-affiliation,
+            .candidate-link {
+                grid-column: 2;
+            }
+        }
+    </style>
+</head>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Main Page</a>
+                    <a href="#">CommonLaw-Republic Governing-Modal Explained</a>
+                    <a href="#">Political Voting & Elections Process Explained</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register, or Log-In</button>
+                <div class="dropdown-content">
+                    <a href="registration.html">Register</a>
+                    <a href="#">Login</a>
+                    <a href="#">Profile</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Local Communities</a>
+                    <a href="#">Members Directory</a>
+                    <a href="#">Events</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Religious Communities</a>
+                    <a href="#">Political Parties</a>
+                    <a href="#">Economics Research Communities</a>
+                    <a href="#">Trade Unions</a>
+                    <a href="#">Agriculture & Food-Production Communities</a>
+                    <a href="#">Environmental Activists</a>
+                    <a href="#">Health Activists</a>
+                    <a href="#">Conspiracy Research Communities</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2><u>Ballot: USA: Presidential Candidates, Preferential-Voting</u></h2>
+
+        <div class="ballot-section">
+            <div class="instructions">
+                <h3>Instructions:</h3>
+                <p>This Ballot is a "Template" for general & public use. In their Response To This Ballot, Registered Users in our Common-Law Republic May Submit Their Votes For Immediate & Real-Time Tallying By Our Computer System.</p>
+                <p>Communities Other than our Common-Law Republic Group May Process & Tally Votes From Ballots Similar As This. This Technology Is Public, Open-Source, & Non-Proprietary.</p>
+                <p>Users of this Ballot May Modify It by Adding or Subtracting Names to the Long List of Candidates Presented Here-In. Subtracted Listed Names will simply Not Be Counted in Polling Vote-Tallying Results. Added Names will be Subjected to Approval from Common-Law Republic Administrative Staff.</p>
+                <p>Registered Users should Modify Their Version of This Ballot by Inserting Numbers Closer to 100 For Preferred-Candidates, & by Inserting Numbers Closer to Zero for Opposed-Candidates.</p>
+                <p>Please see accompanying documents under: <a href="https://CommonLawRepublic.us/Polling&Elections/OrganicBodyPoliticUSA/ConstitutionalDejurePresidency/" target="_blank">Additional Documentation</a></p>
+            </div>
+
+            <div class="form-group">
+                <label>CLR Registered User-Name:</label>
+                <input type="text" required>
+            </div>
+
+            <div class="ballot-header">
+                <h3>Popularly Known Potential Candidates</h3>
+            </div>
+
+            <div class="candidate-list">
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Beck, Glen</span>
+                    <span class="party-affiliation">Republican</span>
+                    <a href="https://glennbeck.com" target="_blank" class="candidate-link">Profile</a>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Biden, Joseph</span>
+                    <span class="party-affiliation">Democrat</span>
+                    <a href="https://en.wikipedia.org/wiki/Joe_Biden" target="_blank" class="candidate-link">Profile</a>
+                </div>
+
+                <!-- Add all other candidates following the same pattern -->
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="ballot-header">
+                <h4>Less Popularly Known Potential Candidates</h4>
+            </div>
+
+            <div class="candidate-list">
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Baldwin, Chuck</span>
+                    <span class="party-affiliation">Constitution</span>
+                    <a href="https://libertyfellowshipmt.com" target="_blank" class="candidate-link">Profile</a>
+                </div>
+
+                <!-- Add all other candidates following the same pattern -->
+            </div>
+
+            <div class="submit-section">
+                <button type="submit">Submit Ballot</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+            <p>With the help of many others; this entire project, as presented thru this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

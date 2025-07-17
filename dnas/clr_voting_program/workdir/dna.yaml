@@ -1,0 +1,19 @@
+manifest_version: '1'
+name: clr_voting_program
+integrity:
+  network_seed: null
+  properties: null
+  zomes:
+  - name: clr_voting_programy_integrity
+    hash: null
+    bundled: ../../../target/wasm32-unknown-unknown/release/clr_voting_programy_integrity.wasm
+    dependencies: null
+    dylib: null
+coordinator:
+  zomes:
+  - name: clr_voting_programy
+    hash: null
+    bundled: ../../../target/wasm32-unknown-unknown/release/clr_voting_programy.wasm
+    dependencies:
+    - name: clr_voting_programy_integrity
+    dylib: null

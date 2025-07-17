@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ballot Selection Page</title>
+</head>
+<body>
+  <h2>Select The Ballot which You Wish to Vote On.</h2>
+  <input type="text" id="voteItemHash" placeholder="Vote Item Hash" />
+  <button onclick="cast()">Cast Vote</button>
+
+  <script type="module">
+    import { callZome } from './app.js';
+
+    async function cast() {
+      const vote_item_hash = document.getElementById('voteItemHash').value;
+
+      const vote = {
+        vote_item_hash,
+        voted_at: Date.now() * 1000,
+        voter: null // handled automatically in zome with agent_info()
+      };
+
+      const result = await callZome("vote_cast", "cast_vote", vote);
+      alert("Vote cast:\n" + JSON.stringify(result));
+    }
+
+    window.cast = cast;
+  </script>
+</body>
+</html>

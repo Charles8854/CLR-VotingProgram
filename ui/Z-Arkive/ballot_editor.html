@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Ballot</title>
+</head>
+<body>
+  <h2>Create a New Ballot</h2>
+  <input type="text" id="title" placeholder="Ballot Title" />
+  <textarea id="description" placeholder="Description"></textarea>
+  <button onclick="submitBallot()">Submit Ballot</button>
+
+  <script type="module">
+    import { callZome } from './app.js';
+
+    async function submitBallot() {
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      const created_at = Date.now() * 1000;
+
+      const agent_info = await (await import('@holochain/client')).AppWebsocket.connect("ws://localhost:8888");
+      const appInfo = await agent_info.appInfo({ installed_app_id: "commonlaw" });
+      const cell_id = appInfo.cell_data[0][0];
+
+      const ballot = {
+        title,
+        description,
+        created_at,
+        created_by: cell_id[1], // agent pubkey
+      };
+
+      const result = await callZome("ballot", "create_ballot", ballot);
+      alert("Ballot created:\n" + JSON.stringify(result));
+    }
+
+    window.submitBallot = submitBallot;
+  </script>
+</body>
+</html>

@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US-Senators-Ballot-CLR</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Ballot Specific Styles */
+        .ballot-section {
+            background-color: var(--secondary-dark);
+            margin: 0.3rem auto;
+            padding: 0.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .ballot-header {
+            background-color: #333;
+            color: #ffec99;
+            padding: 0.4rem;
+            margin: -0.5rem -0.5rem 1rem -0.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 2px solid #ffec99;
+            text-align: center;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            background-color: var(--tertiary-dark);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 1.4;
+            font-size: 1.2rem;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .instructions p {
+            margin-bottom: 0.4rem; /* Reduced spacing between lines */
+        }
+
+        .instructions p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* List Headers Styles */
+        .list-headers {
+            display: grid;
+            grid-template-columns: 100px 120px 200px 120px 200px auto;
+            gap: 1rem;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            border-bottom: 2px solid var(--accent-gold);
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-align: left;
+            align-items: center;
+        }
+
+        /* Senator List Styles */
+        .senator-list {
+            margin: 0.5rem 0;
+        }
+
+        .senator-item {
+            display: grid;
+            grid-template-columns: 100px 120px 200px 120px 200px auto;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            text-align: left;
+        }
+
+        .senator-item:hover {
+            background-color: var(--tertiary-dark);
+        }
+
+        .vote-input {
+            width: 60px !important;
+            text-align: center;
+            padding: 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--tertiary-dark);
+            color: var(--text-light);
+        }
+
+        .senator-name {
+            font-weight: bold;
+        }
+
+        .party-affiliation {
+            color: var(--accent-gold);
+        }
+
+        .senator-link {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+
+        .senator-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* State Header Styles */
+        .state-header {
+            grid-column: 1 / -1;
+            background-color: var(--tertiary-dark);
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-weight: bold;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--accent-gold);
+        }
+
+        /* Submit Button Styles */
+        .submit-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .submit-section button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .submit-section button:hover {
+            background-color: var(--accent-gold-hover);
+            transform: scale(1.02);
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1200px) {
+            .list-headers,
+            .senator-item {
+                grid-template-columns: 80px 100px 1fr 100px;
+            }
+
+            .senator-additional {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-direction: column;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .list-headers,
+            .senator-item {
+                grid-template-columns: 60px 80px 1fr;
+                gap: 0.5rem;
+            }
+
+            .party-affiliation,
+            .senator-link {
+                grid-column: 3;
+            }
+
+            .header-webpage,
+            .header-additional {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Main Page</a>
+                    <a href="#">CommonLaw-Republic Governing-Modal Explained</a>
+                    <a href="#">Political Voting & Elections Process Explained</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Ballots</button>
+                <div class="dropdown-content">
+                    <a href="popular-candidates-ballot.html">Popular Candidates Ballot</a>
+                    <a href="less-popular-candidates-ballot.html">Less Popular Candidates Ballot</a>
+                    <a href="us-senators-ballot.html">US Senators Ballot</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register, or Log-In</button>
+                <div class="dropdown-content">
+                    <a href="registration.html">Register</a>
+                    <a href="#">Login</a>
+                    <a href="#">Profile</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Local Communities</a>
+                    <a href="#">Members Directory</a>
+                    <a href="#">Events</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2><u>Ballot</u>: <u>Preferential-Voting</u>: <u>U.S.A.</u>:<br>
+        <u>United States Senators</u>, <u>Listed</u>.</h2>
+
+        <div class="instructions">
+            <h3><u>Instructions</u>:</h3>
+            <u>Registered Users in our Common-Law Republic Community should</u>:<br>
+            <u>Insert Numbers Closer to 100 for Supported Senators</u>; &:<br>
+            <u>Insert Numbers Closer to Zero for Opposed Senators</u>.
+            <br><br>
+            <p>(More detailed instructions are available under the "Home" tab of our main CLR web-page.)</p>
+        </div>
+
+        <div class="ballot-section">
+            <div class="ballot-header">
+                <h4>US-Senators Listed As Follows:</h4>
+            </div>
+
+            <div class="list-headers">
+                <div>Ranked-Vote:</div>
+                <div>State:</div>
+                <div>Name:</div>
+                <div>Party:</div>
+                <div>Web-Page:</div>
+                <div>Additional Data:</div>
+            </div>
+
+            <div class="senator-list">
+                <!-- Alabama -->
+                <div class="state-header">Alabama</div>
+                <div class="senator-item">
+                    <label for="britt-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="britt-vote" name="britt-vote">
+                    <span class="state-name">Alabama</span>
+                    <span class="senator-name">Katie Britt</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.britt.senate.gov/" target="_blank" class="senator-link">britt.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="tuberville-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="tuberville-vote" name="tuberville-vote">
+                    <span class="state-name">Alabama</span>
+                    <span class="senator-name">Tommy Tuberville</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.tuberville.senate.gov/" target="_blank" class="senator-link">tuberville.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Alaska -->
+                <div class="state-header">Alaska</div>
+                <div class="senator-item">
+                    <label for="murkowski-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="murkowski-vote" name="murkowski-vote">
+                    <span class="state-name">Alaska</span>
+                    <span class="senator-name">Lisa Murkowski</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.murkowski.senate.gov/" target="_blank" class="senator-link">murkowski.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="sullivan-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="sullivan-vote" name="sullivan-vote">
+                    <span class="state-name">Alaska</span>
+                    <span class="senator-name">Dan Sullivan</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.sullivan.senate.gov/" target="_blank" class="senator-link">sullivan.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Arizona -->
+                <div class="state-header">Arizona</div>
+                <div class="senator-item">
+                    <label for="sinema-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="sinema-vote" name="sinema-vote">
+                    <span class="state-name">Arizona</span>
+                    <span class="senator-name">Kyrsten Sinema</span>
+                    <span class="party-affiliation">(I)</span>
+                    <a href="https://www.sinema.senate.gov/" target="_blank" class="senator-link">sinema.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="kelly-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="kelly-vote" name="kelly-vote">
+                    <span class="state-name">Arizona</span>
+                    <span class="senator-name">Mark Kelly</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.kelly.senate.gov/" target="_blank" class="senator-link">kelly.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Arkansas -->
+                <div class="state-header">Arkansas</div>
+                <div class="senator-item">
+                    <label for="boozman-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="boozman-vote" name="boozman-vote">
+                    <span class="state-name">Arkansas</span>
+                    <span class="senator-name">John Boozman</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.boozman.senate.gov/" target="_blank" class="senator-link">boozman.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="cotton-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cotton-vote" name="cotton-vote">
+                    <span class="state-name">Arkansas</span>
+                    <span class="senator-name">Tom Cotton</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.cotton.senate.gov/" target="_blank" class="senator-link">cotton.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- California -->
+                <div class="state-header">California</div>
+                <div class="senator-item">
+                    <label for="butler-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="butler-vote" name="butler-vote">
+                    <span class="state-name">California</span>
+                    <span class="senator-name">Laphonza Butler</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.butler.senate.gov/" target="_blank" class="senator-link">butler.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="padilla-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="padilla-vote" name="padilla-vote">
+                    <span class="state-name">California</span>
+                    <span class="senator-name">Alex Padilla</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.padilla.senate.gov/" target="_blank" class="senator-link">padilla.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Colorado -->
+                <div class="state-header">Colorado</div>
+                <div class="senator-item">
+                    <label for="bennet-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="bennet-vote" name="bennet-vote">
+                    <span class="state-name">Colorado</span>
+                    <span class="senator-name">Michael Bennet</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.bennet.senate.gov/" target="_blank" class="senator-link">bennet.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="hickenlooper-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="hickenlooper-vote" name="hickenlooper-vote">
+                    <span class="state-name">Colorado</span>
+                    <span class="senator-name">John Hickenlooper</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.hickenlooper.senate.gov/" target="_blank" class="senator-link">hickenlooper.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Connecticut -->
+                <div class="state-header">Connecticut</div>
+                <div class="senator-item">
+                    <label for="blumenthal-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="blumenthal-vote" name="blumenthal-vote">
+                    <span class="state-name">Connecticut</span>
+                    <span class="senator-name">Richard Blumenthal</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.blumenthal.senate.gov/" target="_blank" class="senator-link">blumenthal.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="murphy-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="murphy-vote" name="murphy-vote">
+                    <span class="state-name">Connecticut</span>
+                    <span class="senator-name">Chris Murphy</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.murphy.senate.gov/" target="_blank" class="senator-link">murphy.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Delaware -->
+                <div class="state-header">Delaware</div>
+                <div class="senator-item">
+                    <label for="carper-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="carper-vote" name="carper-vote">
+                    <span class="state-name">Delaware</span>
+                    <span class="senator-name">Tom Carper</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.carper.senate.gov/" target="_blank" class="senator-link">carper.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="coons-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="coons-vote" name="coons-vote">
+                    <span class="state-name">Delaware</span>
+                    <span class="senator-name">Chris Coons</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.coons.senate.gov/" target="_blank" class="senator-link">coons.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Florida -->
+                <div class="state-header">Florida</div>
+                <div class="senator-item">
+                    <label for="rubio-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="rubio-vote" name="rubio-vote">
+                    <span class="state-name">Florida</span>
+                    <span class="senator-name">Marco Rubio</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.rubio.senate.gov/" target="_blank" class="senator-link">rubio.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="scott-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="scott-vote" name="scott-vote">
+                    <span class="state-name">Florida</span>
+                    <span class="senator-name">Rick Scott</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.rickscott.senate.gov/" target="_blank" class="senator-link">rickscott.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Georgia -->
+                <div class="state-header">Georgia</div>
+                <div class="senator-item">
+                    <label for="ossoff-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="ossoff-vote" name="ossoff-vote">
+                    <span class="state-name">Georgia</span>
+                    <span class="senator-name">Jon Ossoff</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.ossoff.senate.gov/" target="_blank" class="senator-link">ossoff.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="warnock-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="warnock-vote" name="warnock-vote">
+                    <span class="state-name">Georgia</span>
+                    <span class="senator-name">Raphael Warnock</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.warnock.senate.gov/" target="_blank" class="senator-link">warnock.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Hawaii -->
+                <div class="state-header">Hawaii</div>
+                <div class="senator-item">
+                    <label for="hirono-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="hirono-vote" name="hirono-vote">
+                    <span class="state-name">Hawaii</span>
+                    <span class="senator-name">Mazie Hirono</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.hirono.senate.gov/" target="_blank" class="senator-link">hirono.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="schatz-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="schatz-vote" name="schatz-vote">
+                    <span class="state-name">Hawaii</span>
+                    <span class="senator-name">Brian Schatz</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.schatz.senate.gov/" target="_blank" class="senator-link">schatz.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Idaho -->
+                <div class="state-header">Idaho</div>
+                <div class="senator-item">
+                    <label for="crapo-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="crapo-vote" name="crapo-vote">
+                    <span class="state-name">Idaho</span>
+                    <span class="senator-name">Mike Crapo</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.crapo.senate.gov/" target="_blank" class="senator-link">crapo.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="risch-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="risch-vote" name="risch-vote">
+                    <span class="state-name">Idaho</span>
+                    <span class="senator-name">Jim Risch</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.risch.senate.gov/" target="_blank" class="senator-link">risch.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Illinois -->
+                <div class="state-header">Illinois</div>
+                <div class="senator-item">
+                    <label for="duckworth-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="duckworth-vote" name="duckworth-vote">
+                    <span class="state-name">Illinois</span>
+                    <span class="senator-name">Tammy Duckworth</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.duckworth.senate.gov/" target="_blank" class="senator-link">duckworth.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="durbin-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="durbin-vote" name="durbin-vote">
+                    <span class="state-name">Illinois</span>
+                    <span class="senator-name">Dick Durbin</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.durbin.senate.gov/" target="_blank" class="senator-link">durbin.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Indiana -->
+                <div class="state-header">Indiana</div>
+                <div class="senator-item">
+                    <label for="braun-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="braun-vote" name="braun-vote">
+                    <span class="state-name">Indiana</span>
+                    <span class="senator-name">Mike Braun</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.braun.senate.gov/" target="_blank" class="senator-link">braun.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="young-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="young-vote" name="young-vote">
+                    <span class="state-name">Indiana</span>
+                    <span class="senator-name">Todd Young</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.young.senate.gov/" target="_blank" class="senator-link">young.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Iowa -->
+                <div class="state-header">Iowa</div>
+                <div class="senator-item">
+                    <label for="grassley-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="grassley-vote" name="grassley-vote">
+                    <span class="state-name">Iowa</span>
+                    <span class="senator-name">Chuck Grassley</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.grassley.senate.gov/" target="_blank" class="senator-link">grassley.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="ernst-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="ernst-vote" name="ernst-vote">
+                    <span class="state-name">Iowa</span>
+                    <span class="senator-name">Joni Ernst</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.ernst.senate.gov/" target="_blank" class="senator-link">ernst.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Kansas -->
+                <div class="state-header">Kansas</div>
+                <div class="senator-item">
+                    <label for="moran-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="moran-vote" name="moran-vote">
+                    <span class="state-name">Kansas</span>
+                    <span class="senator-name">Jerry Moran</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.moran.senate.gov/" target="_blank" class="senator-link">moran.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="marshall-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="marshall-vote" name="marshall-vote">
+                    <span class="state-name">Kansas</span>
+                    <span class="senator-name">Roger Marshall</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.marshall.senate.gov/" target="_blank" class="senator-link">marshall.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Kentucky -->
+                <div class="state-header">Kentucky</div>
+                <div class="senator-item">
+                    <label for="mcconnell-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="mcconnell-vote" name="mcconnell-vote">
+                    <span class="state-name">Kentucky</span>
+                    <span class="senator-name">Mitch McConnell</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.mcconnell.senate.gov/" target="_blank" class="senator-link">mcconnell.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="paul-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="paul-vote" name="paul-vote">
+                    <span class="state-name">Kentucky</span>
+                    <span class="senator-name">Rand Paul</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.paul.senate.gov/" target="_blank" class="senator-link">paul.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Louisiana -->
+                <div class="state-header">Louisiana</div>
+                <div class="senator-item">
+                    <label for="cassidy-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cassidy-vote" name="cassidy-vote">
+                    <span class="state-name">Louisiana</span>
+                    <span class="senator-name">Bill Cassidy</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.cassidy.senate.gov/" target="_blank" class="senator-link">cassidy.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="kennedy-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="kennedy-vote" name="kennedy-vote">
+                    <span class="state-name">Louisiana</span>
+                    <span class="senator-name">John Kennedy</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.kennedy.senate.gov/" target="_blank" class="senator-link">kennedy.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Maine -->
+                <div class="state-header">Maine</div>
+                <div class="senator-item">
+                    <label for="collins-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="collins-vote" name="collins-vote">
+                    <span class="state-name">Maine</span>
+                    <span class="senator-name">Susan Collins</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.collins.senate.gov/" target="_blank" class="senator-link">collins.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="king-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="king-vote" name="king-vote">
+                    <span class="state-name">Maine</span>
+                    <span class="senator-name">Angus King</span>
+                    <span class="party-affiliation">(I)</span>
+                    <a href="https://www.king.senate.gov/" target="_blank" class="senator-link">king.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Maryland -->
+                <div class="state-header">Maryland</div>
+                <div class="senator-item">
+                    <label for="cardin-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cardin-vote" name="cardin-vote">
+                    <span class="state-name">Maryland</span>
+                    <span class="senator-name">Ben Cardin</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.cardin.senate.gov/" target="_blank" class="senator-link">cardin.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="vanhollen-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="vanhollen-vote" name="vanhollen-vote">
+                    <span class="state-name">Maryland</span>
+                    <span class="senator-name">Chris Van Hollen</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.vanhollen.senate.gov/" target="_blank" class="senator-link">vanhollen.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Massachusetts -->
+                <div class="state-header">Massachusetts</div>
+                <div class="senator-item">
+                    <label for="warren-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="warren-vote" name="warren-vote">
+                    <span class="state-name">Massachusetts</span>
+                    <span class="senator-name">Elizabeth Warren</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.warren.senate.gov/" target="_blank" class="senator-link">warren.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="markey-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="markey-vote" name="markey-vote">
+                    <span class="state-name">Massachusetts</span>
+                    <span class="senator-name">Ed Markey</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.markey.senate.gov/" target="_blank" class="senator-link">markey.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Michigan -->
+                <div class="state-header">Michigan</div>
+                <div class="senator-item">
+                    <label for="stabenow-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="stabenow-vote" name="stabenow-vote">
+                    <span class="state-name">Michigan</span>
+                    <span class="senator-name">Debbie Stabenow</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.stabenow.senate.gov/" target="_blank" class="senator-link">stabenow.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="peters-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="peters-vote" name="peters-vote">
+                    <span class="state-name">Michigan</span>
+                    <span class="senator-name">Gary Peters</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.peters.senate.gov/" target="_blank" class="senator-link">peters.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Minnesota -->
+                <div class="state-header">Minnesota</div>
+                <div class="senator-item">
+                    <label for="klobuchar-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="klobuchar-vote" name="klobuchar-vote">
+                    <span class="state-name">Minnesota</span>
+                    <span class="senator-name">Amy Klobuchar</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.klobuchar.senate.gov/" target="_blank" class="senator-link">klobuchar.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="smith-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="smith-vote" name="smith-vote">
+                    <span class="state-name">Minnesota</span>
+                    <span class="senator-name">Tina Smith</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.smith.senate.gov/" target="_blank" class="senator-link">smith.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Mississippi -->
+                <div class="state-header">Mississippi</div>
+                <div class="senator-item">
+                    <label for="hydesmith-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="hydesmith-vote" name="hydesmith-vote">
+                    <span class="state-name">Mississippi</span>
+                    <span class="senator-name">Cindy Hyde-Smith</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.hydesmith.senate.gov/" target="_blank" class="senator-link">hydesmith.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="wicker-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="wicker-vote" name="wicker-vote">
+                    <span class="state-name">Mississippi</span>
+                    <span class="senator-name">Roger Wicker</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.wicker.senate.gov/" target="_blank" class="senator-link">wicker.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Missouri -->
+                <div class="state-header">Missouri</div>
+                <div class="senator-item">
+                    <label for="schmitt-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="schmitt-vote" name="schmitt-vote">
+                    <span class="state-name">Missouri</span>
+                    <span class="senator-name">Eric Schmitt</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.schmitt.senate.gov/" target="_blank" class="senator-link">schmitt.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="hawley-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="hawley-vote" name="hawley-vote">
+                    <span class="state-name">Missouri</span>
+                    <span class="senator-name">Josh Hawley</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.hawley.senate.gov/" target="_blank" class="senator-link">hawley.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Montana -->
+                <div class="state-header">Montana</div>
+                <div class="senator-item">
+                    <label for="tester-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="tester-vote" name="tester-vote">
+                    <span class="state-name">Montana</span>
+                    <span class="senator-name">Jon Tester</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.tester.senate.gov/" target="_blank" class="senator-link">tester.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="daines-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="daines-vote" name="daines-vote">
+                    <span class="state-name">Montana</span>
+                    <span class="senator-name">Steve Daines</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.daines.senate.gov/" target="_blank" class="senator-link">daines.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Nebraska -->
+                <div class="state-header">Nebraska</div>
+                <div class="senator-item">
+                    <label for="fischer-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="fischer-vote" name="fischer-vote">
+                    <span class="state-name">Nebraska</span>
+                    <span class="senator-name">Deb Fischer</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.fischer.senate.gov/" target="_blank" class="senator-link">fischer.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="ricketts-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="ricketts-vote" name="ricketts-vote">
+                    <span class="state-name">Nebraska</span>
+                    <span class="senator-name">Pete Ricketts</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.ricketts.senate.gov/" target="_blank" class="senator-link">ricketts.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Nevada -->
+                <div class="state-header">Nevada</div>
+                <div class="senator-item">
+                    <label for="cortezmasto-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cortezmasto-vote" name="cortezmasto-vote">
+                    <span class="state-name">Nevada</span>
+                    <span class="senator-name">Catherine Cortez Masto</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.cortezmasto.senate.gov/" target="_blank" class="senator-link">cortezmasto.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="rosen-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="rosen-vote" name="rosen-vote">
+                    <span class="state-name">Nevada</span>
+                    <span class="senator-name">Jacky Rosen</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.rosen.senate.gov/" target="_blank" class="senator-link">rosen.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- New Hampshire -->
+                <div class="state-header">New Hampshire</div>
+                <div class="senator-item">
+                    <label for="hassan-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="hassan-vote" name="hassan-vote">
+                    <span class="state-name">New Hampshire</span>
+                    <span class="senator-name">Maggie Hassan</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.hassan.senate.gov/" target="_blank" class="senator-link">hassan.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="shaheen-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="shaheen-vote" name="shaheen-vote">
+                    <span class="state-name">New Hampshire</span>
+                    <span class="senator-name">Jeanne Shaheen</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.shaheen.senate.gov/" target="_blank" class="senator-link">shaheen.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- New Jersey -->
+                <div class="state-header">New Jersey</div>
+                <div class="senator-item">
+                    <label for="booker-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="booker-vote" name="booker-vote">
+                    <span class="state-name">New Jersey</span>
+                    <span class="senator-name">Cory Booker</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.booker.senate.gov/" target="_blank" class="senator-link">booker.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="menendez-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="menendez-vote" name="menendez-vote">
+                    <span class="state-name">New Jersey</span>
+                    <span class="senator-name">Bob Menendez</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.menendez.senate.gov/" target="_blank" class="senator-link">menendez.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- New Mexico -->
+                <div class="state-header">New Mexico</div>
+                <div class="senator-item">
+                    <label for="heinrich-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="heinrich-vote" name="heinrich-vote">
+                    <span class="state-name">New Mexico</span>
+                    <span class="senator-name">Martin Heinrich</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.heinrich.senate.gov/" target="_blank" class="senator-link">heinrich.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="lujan-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="lujan-vote" name="lujan-vote">
+                    <span class="state-name">New Mexico</span>
+                    <span class="senator-name">Ben Ray Luján</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.lujan.senate.gov/" target="_blank" class="senator-link">lujan.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- New York -->
+                <div class="state-header">New York</div>
+                <div class="senator-item">
+                    <label for="gillibrand-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="gillibrand-vote" name="gillibrand-vote">
+                    <span class="state-name">New York</span>
+                    <span class="senator-name">Kirsten Gillibrand</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.gillibrand.senate.gov/" target="_blank" class="senator-link">gillibrand.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="schumer-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="schumer-vote" name="schumer-vote">
+                    <span class="state-name">New York</span>
+                    <span class="senator-name">Chuck Schumer</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.schumer.senate.gov/" target="_blank" class="senator-link">schumer.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- North Carolina -->
+                <div class="state-header">North Carolina</div>
+                <div class="senator-item">
+                    <label for="budd-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="budd-vote" name="budd-vote">
+                    <span class="state-name">North Carolina</span>
+                    <span class="senator-name">Ted Budd</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.budd.senate.gov/" target="_blank" class="senator-link">budd.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="tillis-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="tillis-vote" name="tillis-vote">
+                    <span class="state-name">North Carolina</span>
+                    <span class="senator-name">Thom Tillis</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.tillis.senate.gov/" target="_blank" class="senator-link">tillis.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- North Dakota -->
+                <div class="state-header">North Dakota</div>
+                <div class="senator-item">
+                    <label for="cramer-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cramer-vote" name="cramer-vote">
+                    <span class="state-name">North Dakota</span>
+                    <span class="senator-name">Kevin Cramer</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.cramer.senate.gov/" target="_blank" class="senator-link">cramer.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="hoeven-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="hoeven-vote" name="hoeven-vote">
+                    <span class="state-name">North Dakota</span>
+                    <span class="senator-name">John Hoeven</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.hoeven.senate.gov/" target="_blank" class="senator-link">hoeven.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Ohio -->
+                <div class="state-header">Ohio</div>
+                <div class="senator-item">
+                    <label for="brown-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="brown-vote" name="brown-vote">
+                    <span class="state-name">Ohio</span>
+                    <span class="senator-name">Sherrod Brown</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.brown.senate.gov/" target="_blank" class="senator-link">brown.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="vance-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="vance-vote" name="vance-vote">
+                    <span class="state-name">Ohio</span>
+                    <span class="senator-name">J.D. Vance</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.vance.senate.gov/" target="_blank" class="senator-link">vance.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Oklahoma -->
+                <div class="state-header">Oklahoma</div>
+                <div class="senator-item">
+                    <label for="mullin-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="mullin-vote" name="mullin-vote">
+                    <span class="state-name">Oklahoma</span>
+                    <span class="senator-name">Markwayne Mullin</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.mullin.senate.gov/" target="_blank" class="senator-link">mullin.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="lankford-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="lankford-vote" name="lankford-vote">
+                    <span class="state-name">Oklahoma</span>
+                    <span class="senator-name">James Lankford</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.lankford.senate.gov/" target="_blank" class="senator-link">lankford.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Oregon -->
+                <div class="state-header">Oregon</div>
+                <div class="senator-item">
+                    <label for="merkley-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="merkley-vote" name="merkley-vote">
+                    <span class="state-name">Oregon</span>
+                    <span class="senator-name">Jeff Merkley</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.merkley.senate.gov/" target="_blank" class="senator-link">merkley.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="wyden-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="wyden-vote" name="wyden-vote">
+                    <span class="state-name">Oregon</span>
+                    <span class="senator-name">Ron Wyden</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.wyden.senate.gov/" target="_blank" class="senator-link">wyden.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Pennsylvania -->
+                <div class="state-header">Pennsylvania</div>
+                <div class="senator-item">
+                    <label for="casey-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="casey-vote" name="casey-vote">
+                    <span class="state-name">Pennsylvania</span>
+                    <span class="senator-name">Bob Casey Jr.</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.casey.senate.gov/" target="_blank" class="senator-link">casey.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="fetterman-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="fetterman-vote" name="fetterman-vote">
+                    <span class="state-name">Pennsylvania</span>
+                    <span class="senator-name">John Fetterman</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.fetterman.senate.gov/" target="_blank" class="senator-link">fetterman.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Rhode Island -->
+                <div class="state-header">Rhode Island</div>
+                <div class="senator-item">
+                    <label for="reed-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="reed-vote" name="reed-vote">
+                    <span class="state-name">Rhode Island</span>
+                    <span class="senator-name">Jack Reed</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.reed.senate.gov/" target="_blank" class="senator-link">reed.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="whitehouse-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="whitehouse-vote" name="whitehouse-vote">
+                    <span class="state-name">Rhode Island</span>
+                    <span class="senator-name">Sheldon Whitehouse</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.whitehouse.senate.gov/" target="_blank" class="senator-link">whitehouse.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- South Carolina -->
+                <div class="state-header">South Carolina</div>
+                <div class="senator-item">
+                    <label for="graham-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="graham-vote" name="graham-vote">
+                    <span class="state-name">South Carolina</span>
+                    <span class="senator-name">Lindsey Graham</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.lgraham.senate.gov/" target="_blank" class="senator-link">lgraham.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="scott-tim-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="scott-tim-vote" name="scott-tim-vote">
+                    <span class="state-name">South Carolina</span>
+                    <span class="senator-name">Tim Scott</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.scott.senate.gov/" target="_blank" class="senator-link">scott.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- South Dakota -->
+                <div class="state-header">South Dakota</div>
+                <div class="senator-item">
+                    <label for="rounds-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="rounds-vote" name="rounds-vote">
+                    <span class="state-name">South Dakota</span>
+                    <span class="senator-name">Mike Rounds</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.rounds.senate.gov/" target="_blank" class="senator-link">rounds.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="thune-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="thune-vote" name="thune-vote">
+                    <span class="state-name">South Dakota</span>
+                    <span class="senator-name">John Thune</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.thune.senate.gov/" target="_blank" class="senator-link">thune.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Tennessee -->
+                <div class="state-header">Tennessee</div>
+                <div class="senator-item">
+                    <label for="blackburn-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="blackburn-vote" name="blackburn-vote">
+                    <span class="state-name">Tennessee</span>
+                    <span class="senator-name">Marsha Blackburn</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.blackburn.senate.gov/" target="_blank" class="senator-link">blackburn.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="hagerty-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="hagerty-vote" name="hagerty-vote">
+                    <span class="state-name">Tennessee</span>
+                    <span class="senator-name">Bill Hagerty</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.hagerty.senate.gov/" target="_blank" class="senator-link">hagerty.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Texas -->
+                <div class="state-header">Texas</div>
+                <div class="senator-item">
+                    <label for="cornyn-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cornyn-vote" name="cornyn-vote">
+                    <span class="state-name">Texas</span>
+                    <span class="senator-name">John Cornyn</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.cornyn.senate.gov/" target="_blank" class="senator-link">cornyn.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="cruz-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cruz-vote" name="cruz-vote">
+                    <span class="state-name">Texas</span>
+                    <span class="senator-name">Ted Cruz</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.cruz.senate.gov/" target="_blank" class="senator-link">cruz.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Utah -->
+                <div class="state-header">Utah</div>
+                <div class="senator-item">
+                    <label for="lee-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="lee-vote" name="lee-vote">
+                    <span class="state-name">Utah</span>
+                    <span class="senator-name">Mike Lee</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.lee.senate.gov/" target="_blank" class="senator-link">lee.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="romney-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="romney-vote" name="romney-vote">
+                    <span class="state-name">Utah</span>
+                    <span class="senator-name">Mitt Romney</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.romney.senate.gov/" target="_blank" class="senator-link">romney.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Vermont -->
+                <div class="state-header">Vermont</div>
+                <div class="senator-item">
+                    <label for="welch-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="welch-vote" name="welch-vote">
+                    <span class="state-name">Vermont</span>
+                    <span class="senator-name">Peter Welch</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.welch.senate.gov/" target="_blank" class="senator-link">welch.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="sanders-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="sanders-vote" name="sanders-vote">
+                    <span class="state-name">Vermont</span>
+                    <span class="senator-name">Bernie Sanders</span>
+                    <span class="party-affiliation">(I)</span>
+                    <a href="https://www.sanders.senate.gov/" target="_blank" class="senator-link">sanders.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Virginia -->
+                <div class="state-header">Virginia</div>
+                <div class="senator-item">
+                    <label for="kaine-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="kaine-vote" name="kaine-vote">
+                    <span class="state-name">Virginia</span>
+                    <span class="senator-name">Tim Kaine</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.kaine.senate.gov/" target="_blank" class="senator-link">kaine.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="warner-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="warner-vote" name="warner-vote">
+                    <span class="state-name">Virginia</span>
+                    <span class="senator-name">Mark Warner</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.warner.senate.gov/" target="_blank" class="senator-link">warner.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Washington -->
+                <div class="state-header">Washington</div>
+                <div class="senator-item">
+                    <label for="cantwell-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="cantwell-vote" name="cantwell-vote">
+                    <span class="state-name">Washington</span>
+                    <span class="senator-name">Maria Cantwell</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.cantwell.senate.gov/" target="_blank" class="senator-link">cantwell.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="murray-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="murray-vote" name="murray-vote">
+                    <span class="state-name">Washington</span>
+                    <span class="senator-name">Patty Murray</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.murray.senate.gov/" target="_blank" class="senator-link">murray.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- West Virginia -->
+                <div class="state-header">West Virginia</div>
+                <div class="senator-item">
+                    <label for="capito-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="capito-vote" name="capito-vote">
+                    <span class="state-name">West Virginia</span>
+                    <span class="senator-name">Shelley Moore Capito</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.capito.senate.gov/" target="_blank" class="senator-link">capito.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="manchin-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="manchin-vote" name="manchin-vote">
+                    <span class="state-name">West Virginia</span>
+                    <span class="senator-name">Joe Manchin</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.manchin.senate.gov/" target="_blank" class="senator-link">manchin.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Wisconsin -->
+                <div class="state-header">Wisconsin</div>
+                <div class="senator-item">
+                    <label for="baldwin-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="baldwin-vote" name="baldwin-vote">
+                    <span class="state-name">Wisconsin</span>
+                    <span class="senator-name">Tammy Baldwin</span>
+                    <span class="party-affiliation">(D)</span>
+                    <a href="https://www.baldwin.senate.gov/" target="_blank" class="senator-link">baldwin.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="johnson-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="johnson-vote" name="johnson-vote">
+                    <span class="state-name">Wisconsin</span>
+                    <span class="senator-name">Ron Johnson</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.ronjohnson.senate.gov/" target="_blank" class="senator-link">ronjohnson.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+
+                <!-- Wyoming -->
+                <div class="state-header">Wyoming</div>
+                <div class="senator-item">
+                    <label for="barrasso-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="barrasso-vote" name="barrasso-vote">
+                    <span class="state-name">Wyoming</span>
+                    <span class="senator-name">John Barrasso</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.barrasso.senate.gov/" target="_blank" class="senator-link">barrasso.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+                <div class="senator-item">
+                    <label for="lummis-vote">Ranked-Vote:</label><input type="number" min="0" max="100" class="vote-input" id="lummis-vote" name="lummis-vote">
+                    <span class="state-name">Wyoming</span>
+                    <span class="senator-name">Cynthia Lummis</span>
+                    <span class="party-affiliation">(R)</span>
+                    <a href="https://www.lummis.senate.gov/" target="_blank" class="senator-link">lummis.senate.gov</a>
+                    <span class="senator-additional"></span>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit">Submit Ballot</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+            <p>With the help of many others; this entire project, as presented thru this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

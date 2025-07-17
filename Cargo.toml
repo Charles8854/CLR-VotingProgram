@@ -1,0 +1,21 @@
+[profile.dev]
+opt-level = "z"
+
+[profile.release]
+opt-level = "z"
+
+[workspace]
+members = ["dnas/*/zomes/coordinator/*", "dnas/*/zomes/integrity/*"]
+resolver = "2"
+
+[workspace.dependencies]
+hdi = "=0.6.3"
+hdk = "=0.5.3"
+holochain_serialized_bytes = "*"
+serde = "1.0"
+
+[workspace.dependencies.clr_voting_programy]
+path = "dnas/clr_voting_program/zomes/coordinator/clr_voting_programy"
+
+[workspace.dependencies.clr_voting_programy_integrity]
+path = "dnas/clr_voting_program/zomes/integrity/clr_voting_programy"

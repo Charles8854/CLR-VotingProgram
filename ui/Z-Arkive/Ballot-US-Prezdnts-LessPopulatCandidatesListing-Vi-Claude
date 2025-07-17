@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLR Less Popular Presidential Candidates - Preferential Voting</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Ballot Specific Styles */
+        .ballot-section {
+            background-color: var(--secondary-dark);
+            margin: 0.3rem auto;
+            padding: 0.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .ballot-header {
+            background-color: #333;
+            color: #ffec99;
+            padding: 0.4rem;
+            margin: -0.5rem -0.5rem 1rem -0.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 2px solid #ffec99;
+            text-align: center;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            background-color: var(--tertiary-dark);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 1.4;
+            font-size: 1.2rem;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .instructions p {
+            margin-bottom: 0.8rem;
+        }
+
+        .instructions p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* List Headers Styles */
+        .list-headers {
+            display: grid;
+            grid-template-columns: 100px 250px 150px 250px auto;
+            gap: 1rem;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            border-bottom: 2px solid var(--accent-gold);
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-align: left;
+            align-items: center;
+        }
+
+        /* Candidate List Styles */
+        .candidate-list {
+            margin: 0.5rem 0;
+        }
+
+        .candidate-item {
+            display: grid;
+            grid-template-columns: 100px 250px 150px 250px auto;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            text-align: left;
+        }
+
+        .candidate-item:hover {
+            background-color: var(--tertiary-dark);
+        }
+
+        .vote-input {
+            width: 60px !important;
+            text-align: center;
+            padding: 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--tertiary-dark);
+            color: var(--text-light);
+        }
+
+        .candidate-name {
+            font-weight: bold;
+        }
+
+        .party-affiliation {
+            color: var(--accent-gold);
+        }
+
+        .candidate-link {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+
+        .candidate-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Submit Button Styles */
+        .submit-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .submit-section button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .submit-section button:hover {
+            background-color: var(--accent-gold-hover);
+            transform: scale(1.02);
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1200px) {
+            .list-headers,
+            .candidate-item {
+                grid-template-columns: 80px 1fr 120px auto;
+            }
+
+            .candidate-additional {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-direction: column;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .list-headers,
+            .candidate-item {
+                grid-template-columns: 60px 1fr;
+                gap: 0.5rem;
+            }
+
+            .party-affiliation,
+            .candidate-link {
+                grid-column: 2;
+            }
+
+            .header-webpage,
+            .header-additional {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Main Page</a>
+                    <a href="#">CommonLaw-Republic Governing-Modal Explained</a>
+                    <a href="#">Political Voting & Elections Process Explained</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Ballots</button>
+                <div class="dropdown-content">
+                    <a href="popular-candidates-ballot.html">Popular Candidates Ballot</a>
+                    <a href="less-popular-candidates-ballot.html">Less Popular Candidates Ballot</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register, or Log-In</button>
+                <div class="dropdown-content">
+                    <a href="registration.html">Register</a>
+                    <a href="#">Login</a>
+                    <a href="#">Profile</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Local Communities</a>
+                    <a href="#">Members Directory</a>
+                    <a href="#">Events</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2><u>Less Popular Presidential Candidates Ballot</u></h2>
+
+        <div class="ballot-section">
+            <div class="instructions">
+                <h3><u>Instructions</u>:</h3>
+                <p>Registered Users in our Common-Law Republic Community, should Modify This Ballot 
+                by <u>Inserting Numbers Closer to 100 For Preferred-Candidates</u>, 
+                & by <u>Inserting Numbers Closer to Zero for Opposed-Candidates</u>.</p>
+                <p>These Same CLR Account Holders May Submit Their Modified Ballots & Votes 
+                For Immediate & Real-Time Tallying By Our Computer System's Data-Base.</p>
+                <p>Users May also submit New Names of Candidates 
+                for Inclusion in Future Listings in this Ballot.</p>
+                <p>(More detailed instructions are available under 
+                the pull-down menu of the "Home" tab on our main CLR web-page.)</p>
+            </div>
+
+            <div class="ballot-header">
+                <h4>Less Popularly Known Potential Candidates</h4>
+            </div>
+
+            <div class="list-headers">
+                <div>Ranked-Vote:</div>
+                <div>Name:</div>
+                <div>Party:</div>
+                <div>Web-Page:</div>
+                <div>Additional Data:</div>
+            </div>
+
+            <div class="candidate-list">
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Baldwin, Chuck</span>
+                    <span class="party-affiliation">Constitution</span>
+                    <a href="https://libertyfellowshipmt.com" target="_blank" class="candidate-link">libertyfellowshipmt.com</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Corbett, James</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://www.corbettreport.com/" target="_blank" class="candidate-link">corbettreport.com</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Dingis, Eric</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://brighteon.com/bf1a3d3f-a681-486b-b90e-26ac322ac8d4" target="_blank" class="candidate-link">Brighteon Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Duke, David</span>
+                    <span class="party-affiliation">Republican?</span>
+                    <a href="https://davidduke.com" target="_blank" class="candidate-link">davidduke.com</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Farrell, Joseph</span>
+                    <span class="party-affiliation">?</span>
+                    <a href="https://gizadeathstar.com/" target="_blank" class="candidate-link">gizadeathstar.com</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Geiger, James</span>
+                    <span class="party-affiliation">Republic</span>
+                    <a href="https://republicfortheunitedstatesofamerica.org/?s=Geiger" target="_blank" class="candidate-link">Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Hammond, Lewis</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://waynecountyassembly.info/" target="_blank" class="candidate-link">waynecountyassembly.info</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Irvin, Jan</span>
+                    <span class="party-affiliation">?</span>
+                    <a href="https://logosmedia.com/" target="_blank" class="candidate-link">logosmedia.com</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Johns, Daniel</span>
+                    <span class="party-affiliation"></span>
+                    <a href="http://www.pastordan.net/" target="_blank" class="candidate-link">pastordan.net</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Landholt, Nicholas</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://www.facebook.com/landholt2016/" target="_blank" class="candidate-link">Facebook Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Nalley, Paul</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://www.youtube.com/watch?v=3rndk0OgfYg" target="_blank" class="candidate-link">YouTube Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Mack, Richard</span>
+                    <span class="party-affiliation">Constitution?</span>
+                    <a href="https://wikipedia.org/wiki/Richard_Mack" target="_blank" class="candidate-link">Wikipedia Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Makow, Henry</span>
+                    <span class="party-affiliation">Constitution?</span>
+                    <a href="https://henrymakow.com" target="_blank" class="candidate-link">henrymakow.com</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Rhodes, Stuart/Stewart</span>
+                    <span class="party-affiliation">Constitution?</span>
+                    <a href="https://en.wikipedia.org/wiki/Stewart_Rhodes" target="_blank" class="candidate-link">Wikipedia Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Stewart, Charles</span>
+                    <span class="party-affiliation"></span>
+                    <a href="http://ConstitutionalGov.us/Archive/Charles/" target="_blank" class="candidate-link">Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Turner, Tim</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://www.amazon.com/James-Timothy-Turner-President-Political/dp/0997276657" target="_blank" class="candidate-link">Amazon Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">VanSchaick/Singer, Michael</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://righteousarmy.org/" target="_blank" class="candidate-link">righteousarmy.org</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Von Reitz, Anna</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://tasa.americanstatenationals.org/" target="_blank" class="candidate-link">TASA Profile</a>
+                    <span class="candidate-additional"></span>
+                </div>
+
+                <div class="candidate-item">
+                    <input type="number" min="0" max="100" class="vote-input">
+                    <span class="candidate-name">Zarzano, Michael</span>
+                    <span class="party-affiliation"></span>
+                    <a href="https://unitedcountiesofamerica.com/" target="_blank" class="candidate-link">unitedcountiesofamerica.com</a>
+                    <span class="candidate-additional"></span>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit">Submit Ballot</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+            <p>With the help of many others; this entire project, as presented thru this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
