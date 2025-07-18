@@ -385,7 +385,7 @@ body {
                as follows:</p>
         </div>
 
-        <form class="registration-form" method="POST">
+        <form class="registration-form" method="POST" id="registrationForm">
             <div class="form-group">
                 <label>1: Please here Enter <u>Your Main "Email-Address</u>":</label>
                 <input type="email" required>
@@ -480,40 +480,75 @@ body {
     
 </main>
 
-<script>
-  import { AppWebsocket } from 'https://cdn.jsdelivr.net/npm/@holochain/client/+esm';
-  document.getElementById('registerForm').addEventListener("submit", async function(e){
-    e.preventDefault()
-    
-    const formdata = new FormData(this)
-    const payload={
-      name: formdata.get("name"),
-      email: formdata.get("email"),
-      password: formdata.get("password"),
-      region: formdata.get("region"),
+
+<script type="module">
+import { AppWebsocket } from 'https://cdn.jsdelivr.net/npm/@holochain/client/+esm';
+
+
+const getholochainclient = (() => {
+    let client;
+    return async function() {
+        if (!client) {
+            try {
+                client = await AppWebsocket.connect();
+                console.log("Connected to Holochain!");
+            } catch (err) {
+                console.error("Failed to connect to Holochain backend:", err);
+                throw err;
+            }
+        }
+        return client;
     }
+})();
+
+document.addEventListener("DOMContentLoaded", async function() {
+    await getholochainclient();
+    console.log("donconnected");
+});
+
+// Registration form submit handler
+document.getElementById('registrationForm').addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    // Get the Holochain client
+    const appWebsocket = await getholochainclient();
+
+    // Prepare form data
+    const formdata = new FormData(this);
+    const payload = {
+        name: formdata.get("name"),
+        email: formdata.get("email"),
+        password: formdata.get("password"),
+        region: formdata.get("region"),
+    };
 
     try {
-      const appWebsocket = await AppWebsocket.connect('ws://localhost:8888');
-      const appInfo = await appWebsocket.appInfo({ installed_app_id: 'CLR-VotingProgram' });
+        // Fetch app info and cell id
+        const appInfo = await appWebsocket.appInfo({ installed_app_id: 'CLR-VotingProgram' });
 
+        // Find cell for zome (may need adjustment depending on your DNA/App setup)
+        // Make sure to match the cell info structure
+        const cell = appInfo.cell_info["clr_voting_program"][0];
+        const cell_id = cell.provisioned.cell_id;
 
-      const cell =appInfo.cell_info["clr_voting_program"][0]
-      const cell_id = cell.provisioned.cell_id
-      const results = await appWebsocket.callZome({
-        cap_secret: null, 
-        cell_id:cell_id, 
-        zome_name:"agent_profile", 
-        fn_name:"create_agent_profile",
-        payload:payload,
-        provenance:cell_id[1]
-      })
-      console.log("success")
-      } catch (err) {
-                console.error(err);
-                alert('An error occurred during registration.');
-            }
-  })
+        // Call Zome function for creating agent profile
+        const result = await appWebsocket.callZome({
+            cap_secret: null,
+            cell_id: cell_id,
+            zome_name: "agent_profile",
+            fn_name: "create_agent_profile",
+            payload: payload,
+            provenance: cell_id[1] // agentPubKey
+        });
+
+        console.log("Registration successful:", result);
+        alert('Registration successful! Please check your email for confirmation.');
+        // Optionally redirect or show a confirmation
+    } catch (err) {
+        console.error(err);
+        alert('An error occurred during registration. ' + (err.message || ''));
+    }
+});
 </script>
 </body>
 </html>
