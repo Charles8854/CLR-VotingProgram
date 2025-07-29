@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>California-SState-CLR</title>
     <style>
-        /* (styles unchanged from your template) */
+        /* Root Variables and Basic Reset */
         :root {
             --primary-dark: #000000;
             --secondary-dark: #111111;
@@ -18,32 +18,81 @@
             --border-color: #444;
             --shadow-color: rgba(255, 215, 0, 0.2);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            margin: 0; padding: 0;
+            margin: 0;
+            padding: 0;
             font-family: "Times New Roman", Times, serif;
             background-color: var(--primary-dark);
             color: var(--text-light);
             line-height: 1.6;
-            text-align: center;
+            font-size: 1.2rem;
         }
+
+        /* Typography */
         h1, h2, h3, h4, h5, h6 {
             color: var(--accent-gold);
             margin-bottom: 1rem;
         }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+        }
+
         a {
             color: var(--accent-gold);
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        a:hover { color: var(--accent-gold-hover); }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        p {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* New subtitle class */
+        .subtitle {
+            font-size: 1.6rem;
+            color: var(--accent-gold);
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Header Styles */
         .main-header {
             background-color: var(--primary-dark);
             border-bottom: 2px solid var(--accent-gold);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
-        .header-title { text-align: center; padding: 1rem 0; }
-        .header-title h1 { font-size: 2.7rem; margin: 0; color: #ffffff; }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 3.2rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
         .topnav {
             background-color: var(--secondary-dark);
             display: flex;
@@ -54,22 +103,28 @@
             top: 0;
             z-index: 1000;
         }
+
         .dropdown {
             position: relative;
             display: inline-block;
             margin: 0 0.5rem;
         }
+
         .dropbtn {
             background-color: transparent;
             color: var(--accent-gold);
             padding: 0.8rem 1.2rem;
-            font-size: 1rem;
+            font-size: 1.1rem;
             border: none;
             cursor: pointer;
             font-weight: bold;
             transition: color 0.3s ease;
         }
-        .dropbtn:hover { color: var(--accent-gold-hover); }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -80,304 +135,570 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
         }
+
         .dropdown-content a {
             color: var(--text-light);
-            padding: 12px 16px;
+            padding: 14px 18px;
             display: block;
             text-align: left;
+            font-size: 1.05rem;
         }
+
+        .dropdown-content .long-item {
+            white-space: normal;
+            line-height: 1.2;
+            padding: 10px 18px;
+        }
+
         .dropdown-content a:hover {
             background-color: var(--secondary-dark);
             color: var(--accent-gold);
         }
-        .dropdown:hover .dropdown-content { display: block; }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
         .main-content {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1rem 1rem 1rem;
+            text-align: center;
         }
+
         .state-list {
             background-color: var(--secondary-dark);
             border-radius: 12px;
             padding: 2rem 1rem;
-            max-width: 500px;
+            max-width: 800px;
             margin: 2rem auto;
             box-shadow: 0 4px 10px var(--shadow-color);
             border: 1px solid var(--border-color);
         }
-        .state-list ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+
+        .state-list table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--text-light);
+            font-size: 1.3rem;
         }
-        .state-list li {
-            margin: 0.8rem 0;
-            font-size: 1.2rem;
+
+        .state-list th, .state-list td {
+            border-bottom: 1px solid var(--accent-gold);
+            padding: 12px 10px;
+            text-align: left;
         }
-        .state-list a {
+
+        .state-list th {
+            background-color: var(--tertiary-dark);
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .state-list td a {
             color: var(--accent-gold);
             text-decoration: underline;
             font-weight: bold;
+            font-size: 1.3rem;
         }
-        .state-list a:hover {
+
+        .state-list td a:hover {
             color: var(--accent-gold-hover);
-            text-decoration: underline;
         }
-        footer {
-            margin-top: 4rem;
-            padding: 1rem;
+
+        .state-list tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Reference Table Styles */
+        .reference-section {
             background-color: var(--secondary-dark);
+            border-radius: 12px;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .reference-table {
+            width: 100%;
+            border-collapse: collapse;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .reference-table th, .reference-table td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .reference-table th {
+            background-color: var(--tertiary-dark);
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .reference-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .reference-table tr:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Map Styles */
+        .map-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 1rem 0;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .responsive-map {
+            min-width: 25%;
+            max-width: 70%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .responsive-map:hover {
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .note {
+            font-size: 1.3rem;
+            color: var(--highlight-pink);
+            margin-top: 0.5em;
+        }
+
+        /* Footer Styles */
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
             border-top: 1px solid var(--border-color);
         }
-        @media screen and (max-width: 768px) {
-            .topnav { flex-direction: column; }
-            .dropdown { width: 100%; margin: 0; }
-            .dropbtn { width: 100%; padding: 1rem; }
-            .dropdown-content { width: 100%; position: relative; }
-            .main-content { padding: 1rem; }
-            .state-list { padding: 1.2rem 0.4rem; }
+
+        .footer-bottom p {
+            font-size: 1.4rem;
         }
-                .responsive-map{
-            min-width:25%;
-            max-width:70%;
-            height: auto;
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .divider {
+            border-top: 1px solid var(--accent-gold);
+            margin: 2rem auto;
+            width: 80%;
+        }
+
+        /* Multi-column reference table layout */
+        .reference-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media screen and (max-width: 900px) {
+            .reference-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .reference-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 1.1rem;
+            }
+
+            .topnav {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.05rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .dropdown-content a {
+                font-size: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .state-list {
+                padding: 1.2rem 0.4rem;
+            }
+
+            .state-list table {
+                font-size: 1.1rem;
+            }
+
+            .state-list th {
+                font-size: 1.3rem;
+            }
+
+            .state-list td a {
+                font-size: 1.1rem;
+            }
+
+            .reference-table {
+                font-size: 0.9rem;
+            }
+
+            .header-title h1 {
+                font-size: 2.4rem;
+            }
+
+            h2 {
+                font-size: 1.9rem;
+            }
+
+            h3 {
+                font-size: 1.6rem;
+            }
+
+            .subtitle {
+                font-size: 1.4rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .responsive-map {
+                max-width: 95%;
+            }
+            
+            .footer-bottom p {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <body>
-        <header class="main-header">
+    <!-- Header Section -->  
+    <header class="main-header">
         <div class="header-title">
             <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
         </div>
 
         <nav class="topnav">
             <div class="dropdown">
-                <button class="dropbtn">Home-Page</button>
+                <button class="dropbtn">Home Page.</button>
                 <div class="dropdown-content">
-                    <a href="index.html">Home Page</a>
-                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
+                    <a href="../../index.html">Home Page.</a>
+                    <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+                    <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
                 </div>
             </div>
 
             <div class="dropdown">
-                <button class="dropbtn">Register;
-                  or: Log-In.</button>
+                <button class="dropbtn">Register; or: Log-In.</button>
                 <div class="dropdown-content">
-                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
-                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
-                    <a href="Accounts-Profiles-Registering/ProfileIndexManagement.html">Different User-Account Profile-Pages; Explained</a>
-                </div>
-            </div>
-
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">USA-National-Categories-Index</button>
-                <div class="dropdown-content">
-                    <a href="./USA-NationalIssues/NationalCategories-Index.html">USA-National-Categories-Index</a>
-                    <a href="./USA-NationalIssues/ExecutiveDepartment-Prez/index.html">Executive-Department-Prez</a>
-                    <a href="./USA-NationalIssues/JudicialDepartment/JudicialIndex.html">Judicial-Department</a>
-                    <a href="./USA-NationalIssues/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature-HouseReps</a>
-                    <a href="./USA-NationalIssues/Legislature-Senate/Leg-Senate.html">Legislature-Senate</a>
-                    <a href="./USA-NationalIssues/Treasury/TreasuryIndex.html">Treasury</a>
-                    <a href="./USA-NationalIssues/SecretaryofState/SecofStateIndex.html">Secretary-of-State</a>
-                    <a href="./USA-NationalIssues/Z-Agencies/Agencies.html">Z-Agencies-CIA-DOJ-FBI</a>                                                            
+                    <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+                    <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
                 </div>
             </div>
 
             <div class="dropdown">
-                <button class="dropbtn">Local Community Organizing</button>
-                <div class="dropdown-content"style="text-align:center;">
-                    <a href="#">Residence & Geographical-Location</a>
-                    <p><u>USA Super-States</u>:</p>
-                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
-                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
-                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
-                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
-                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
-                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
-                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">USA-08: West-Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
-                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
-                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
-                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">USA-12: California</a>
-                            <p><u>World Regions</u>:</p>
-                            <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
-                            <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
-                            <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
-                            <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
-                            <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
-                            <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
-                            <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
-                            <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
-                            <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
-                            <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
+                <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+                <div class="dropdown-content">
+                    <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+                    <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
+                    <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
                 </div>
             </div>
 
             <div class="dropdown">
-                <button class="dropbtn">Private/Special/Ideological/Religious Organizing</button>
-                <div class="dropdown-content">
-                    <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
-                    <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
-                    <a href="./PrivateSpecialReligiousCommunities/4-Trade-Unions/TradeUnions.html">Trade Unions</a>
-                    <a href="./PrivateSpecialReligiousCommunities/5-FoodProduction&Distribution-Communities/FoodProduction.html">Food Production & Distribution Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/6-EnvironmentalActivist-Communities/EnvironmentActivism.html">Environmental Activist Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/7-HealthActivist-Communities/HealthActivism.html">Health Activist Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
+                <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+                <div class="dropdown-content" style="text-align:center;">
+                    <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
+                    <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
+                    <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
+                    <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
+                    <a href="../../USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
+                    <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">06: Florida-Georgia</a>
+                    <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">07: Mississippi-Valley</a>
+                    <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" value="usa-08">08: NorthCentral-Plains</a>
+                    <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
+                    <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
+                    <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
+                    <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">12: California</a>
                 </div>
             </div>
 
             <div class="dropdown">
-                <button class="dropbtn">Support</button>
+                <button class="dropbtn">EveryThing Else:</button>
                 <div class="dropdown-content">
-                    <a href="./Support/Support.html">Support-Help-Contacts</a>                </div>
+                    <a href="../../EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+                    <a href="../../EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities.</a>
+                    <a href="../../EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations.</a>
+                    <a href="../../EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+                    <a href="../../EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../../Support/Support.html">Support-Help-Contacts</a>
+                </div>
             </div>
         </nav>
     </header>
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+    <!-- Main Content Area -->
     <main class="main-content">
-            <h2><u>As With-In This: "California CLR-Super-State</u>":<br>
-below are Links & Information About our<br>
-<u>Twelve Individual "Common-Law Republic Mini-States</u>":</h2>
-
-        <u>Total California "Population</u>" Included Here-In: <u>39,431,263</u>.<br>
-        <u>Total "US-Civil-Government Representatives-Districts</u>" Included Here-In: <u>52</u>.
-        <br><br>
-        Here-under; "<u>Essential Principles" of "Common-Law Republicanism</u>", <u>Mandate</u>, that: 
-Our Smaller-Communities become <u>Organized for "Responsible Self-Governing</u>"; 
-all of which Requires Our Vigilantly "Keeping the Peace", "Administering Justice", 
-Conducting Regular "Political-Polling Process", 
-& "Promptly Paying All of Our Legitimate Commercial-Debts". 
-<br>
-<u>For These in Essential Organic/Constitutional Purposes</u>, 
-our CLR-Leadership has <u>Re-Assigned 
-the Below Listed 38 US-Civil-Government Representatives-Districts</u>, 
-<u>in-to Twelve Individual Common-Law Republic Mini-States Districts</u>; 
-as follows: 
+        <h2>As <u>With-In This</u>: "<u>California CLR-Super-State</u>":</h2>
+        <p class="subtitle">below are Links & Information About our<br>
+        <u>Twelve Individual</u> "<u>Common-Law Republic Mini-States</u>":</p>
         
+        <p><u>Total California Super-State's "Population</u>" Included Here-In: <u>39,431,263</u>.<br>
+        <u>Total "US-Civil-Government Representatives-Districts</u>" Included Here-In: <u>52</u>.</p>
+        
+        <p>Here-under; "<u>Essential Principles" of "Common-Law Republicanism</u>", <u>Mandate</u>, that: 
+        Our Smaller-Communities become <u>Organized for "Responsible Self-Governing</u>"; 
+        all of which Requires Our Vigilantly "Keeping the Peace", "Administering Justice", 
+        Conducting Regular "Political-Polling Process", 
+        & "Promptly Paying All of Our Legitimate Commercial-Debts".</p>
+        
+        <p><u>For These in Essential Organic/Constitutional Purposes</u>, 
+        our CLR-Leadership has <u>Re-Assigned 
+        the Below Listed 52 US-Civil-Government Representatives-Districts</u>, 
+        <u>in-to Twelve Individual Common-Law Republic Mini-States Districts</u>; 
+        as follows:</p>
+
         <div class="state-list">
-            <ul>
-            <li><a href="./">CLR-District 1, North California:</a></li>
-            Includes: US-Representative Civil-Districts: 1, 2, 4, & 8. 
-            <br><br>
-
-            <li><a href="./">CLR-District 2, East Bay-Area:</a></li>
-            Includes: US-Representative Civil-Districts: 3, 6, 7, 10, & 12.
-            <br><br>    
-
-            <li><a href="./">CLR-District 3, South-East Bay-Area:</a></li>
-            Includes: US-Representative Civil-Districts: 5, 9, 14, & 17.
-            <br><br>
-
-           <li><a href="./">CLR-District 4, South San-Francisco:</a></li>
-           Includes: US-Representative Civil-Districts: 11, 15, 16, & 19.
-           <br><br>  
-
-            <li><a href="./">CLR-District 5, Central California:</a></li>
-            Includes: US-Representative Civil-Districts: 13, 18, 20, 21, & 22.
-            <br><br> 
-
-            <li><a href="./">CLR-District 6, North-Coast Los-Angeles:</a></li>
-            Includes: US-Representative Civil-Districts: 24, 26, 27, & 29. <br>
-
-            <li><a href="./">CLR-District 7, North Los-Angeles:</a></li>
-            Includes: US-Representative Civil-Districts: 30, 32, 36, & 37.
-            <br><br>
-
-            <li><a href="./">CLR-District 8, North-East Los-Angeles:</a></li>
-            Includes: US-Representative Civil-Districts: 23, 28, 31, & 34.
-            <br><br>
-
-            <li><a href="./">CLR-District 9, East Los-Angeles:</a></li>
-            Includes: US-Representative Civil-Districts: 33, 35, 38, 42, & 43.
-            <br><br>
-
-            <li><a href="./">CLR-District 10, South-Coast Los-Angeles:</a></li>
-            Includes: US-Representative Civil-Districts: 44, 45, 46, & 47.
-            <br><br>
-
-            <li><a href="./">CLR-District 11, South-East California:</a></li>
-            Includes: US-Representative Civil-Districts 25, 39, 40, & 41.
-            <br><br>
-
-            <li><a href="./">CLR-District 12, San-Diego Coast:</a></li>
-            Includes: US-Representative Civil-Districts: 48, 49, 50, 51, & 52.
-            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>CommonLaw-Republic<br>US-Rep Districts:</th>
+                        <th>Civil-Gov US-Rep Districts:</th>
+                        <th>Population Estimates:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="./">CLR-D-1, North California</a></td>
+                        <td>1, 2, 4, & 8</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-2, East Bay-Area</a></td>
+                        <td>3, 6, 7, 10, & 12</td>
+                        <td>3,791,468</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-3, South-East Bay-Area</a></td>
+                        <td>5, 9, 14, & 17</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-4, South San-Francisco</a></td>
+                        <td>11, 15, 16, & 19</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-5, Central California</a></td>
+                        <td>13, 18, 20, 21, & 22</td>
+                        <td>3,791,468</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-6, North-Coast Los-Angeles</a></td>
+                        <td>24, 26, 27, & 29</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-7, North Los-Angeles</a></td>
+                        <td>30, 32, 36, & 37</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-8, North-East Los-Angeles</a></td>
+                        <td>23, 28, 31, & 34</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-9, East Los-Angeles</a></td>
+                        <td>33, 35, 38, 42, & 43</td>
+                        <td>3,791,468</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-10, South-Coast Los-Angeles</a></td>
+                        <td>44, 45, 46, & 47</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-11, South-East California</a></td>
+                        <td>25, 39, 40, & 41</td>
+                        <td>3,033,174</td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-12, San-Diego Coast</a></td>
+                        <td>48, 49, 50, 51, & 52</td>
+                        <td>3,791,468</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-                <!-- Map Section -->
-    <div class="map-container text-center">
-        <img 
-            src="California-CongressDistrictsMap-2025.svg" 
-            alt="Map of 52 California US-Reps Districts:" 
-            class="responsive-map"
-        >
-    </div>
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    <br>
-US-Rep Civil-District 1, is included in our North California CLR-District 1.<br>
-US-Rep Civil-District 2, is included in our North California CLR-District 1.<br>
-US-Rep Civil-District 3, is included in our East Bay-Area CLR-District 2.<br>
-US-Rep Civil-District 4, is included in our North California CLR-District 1.<br>
-US-Rep Civil-District 5, is included in our South-East Bay-Area CLR-District 3.<br>
-US-Rep Civil-District 6, is included in our East Bay-Area CLR-District 2.<br>
-US-Rep Civil-District 7, is included in our East Bay-Area CLR-District 2.<br>
-US-Rep Civil-District 8, is included in our North California CLR-District 1.<br>
-US-Rep Civil-District 9, is included in our South-East Bay-Area CLR-District 3.<br>
-US-Rep Civil-District 10, is included in our East Bay-Area CLR-District 2.<br> 
-US-Rep Civil-District 11, is included in our South San-Francisco CLR-District 4.<br>
-US-Rep Civil-District 12, is included in our East Bay-Area CLR-District 2.<br>
-US-Rep Civil-District 13, is included in our Central California CLR-District 5.<br>
-US-Rep Civil-District 14, is included in our South-East Bay-Area CLR-District 3.<br>
-US-Rep Civil-District 15, is included in our South San-Francisco CLR-District 4.<br>
-US-Rep Civil-District 16, is included in our South San-Francisco CLR-District 4.<br>
-US-Rep Civil-District 17, is included in our South-East Bay-Area CLR-District 3.<br> 
-US-Rep Civil-District 18, is included in our Central California CLR-District 5.<br>
-US-Rep Civil-District 19, is included in our South San-Francisco CLR-District 4.<br>
-US-Rep Civil-District 20, is included in our Central California CLR-District 5.<br>
-US-Rep Civil-District 21, is included in our Central California CLR-District 5.<br>. 
-US-Rep Civil-District 22, is included in our Central California CLR-District 5.<br>
-US-Rep Civil-District 23, is included in our North-East Los-Angeles CLR-District 8.<br>
-US-Rep Civil-District 24, is included in our North-Coast Los-Angeles CLR-District 6.<br>
-US-Rep Civil-District 25, is included in our South-East California CLR-District 11.<br>
-US-Rep Civil-District 26, is included in our North-Coast Los-Angeles CLR-District 6.<br>
-US-Rep Civil-District 27, is included in our North-Coast Los-Angeles CLR-District 6.<br>
-US-Rep Civil-District 28, is included in our North-East Los-Angeles CLR-District 8.<br> 
-US-Rep Civil-District 29, is included in our North-Coast Los-Angeles CLR-District 6.<br>
-US-Rep Civil-District 30, is included in our North Los-Angeles CLR-District 7.<br>
-US-Rep Civil-District 31, is included in our North-East Los-Angeles CLR-District 8.<br>
-US-Rep Civil-District 32, is included in our North Los-Angeles CLR-District 7.<br>
-US-Rep Civil-District 33, is included in our East Los-Angeles CLR-District 9.<br>
-US-Rep Civil-District 34, is included in our North-East Los-Angeles CLR-District 8.<br>
-US-Rep Civil-District 35, is included in our East Los-Angeles CLR-District 9.<br> 
-US-Rep Civil-District 36, is included in our North Los-Angeles CLR-District 7.<br>
-US-Rep Civil-District 37, is included in our North Los-Angeles CLR-District 7.<br> 
-US-Rep Civil-District 38, is included in our East Los-Angeles CLR-District 9.<br>
-US-Rep Civil-District 39, is included in our South-East California CLR-District 11.<br>
-US-Rep Civil-District 40, is included in our South-East California CLR-District 11.<br>
-US-Rep Civil-District 41, is included in our South-East California CLR-District 11.<br>
-US-Rep Civil-District 42, is included in our East Los-Angeles CLR-District 9.<br>
-US-Rep Civil-District 43, is included in our East Los-Angeles CLR-District 9.<br> 
-US-Rep Civil-District 44, is included in our South-Coast Los-Angeles CLR-District 10.<br>
-US-Rep Civil-District 45, is included in our South-Coast Los-Angeles CLR-District 10.<br>
-US-Rep Civil-District 46, is included in our South-Coast Los-Angeles CLR-District 10.<br>
-US-Rep Civil-District 47, is included in our South-Coast Los-Angeles CLR-District 10.<br>
-US-Rep Civil-District 48, is included in our San-Diego Coast CLR-District 12.<br>
-US-Rep Civil-District 49, is included in our San-Diego Coast CLR-District 12.<br>
-US-Rep Civil-District 50, is included in our San-Diego Coast CLR-District 12.<br> 
-US-Rep Civil-District 51, is included in our San-Diego Coast CLR-District 12.<br>
-US-Rep Civil-District 52, is included in our San-Diego Coast CLR-District 12.
+
+        <!-- Map Section -->
+        <div class="map-container">
+            <img 
+                src="California-CongressDistrictsMap-2025.svg" 
+                alt="Map of 52 California US-Reps Districts" 
+                class="responsive-map"
+            >
+        </div>
+
+        <!-- Reference Section -->
+        <div class="divider"></div>
+        <h3>District Reference Guide</h3>
+        <p>Find your Civil US-Rep District and corresponding CLR District below:</p>
+        
+        <div class="reference-section">
+            <div class="reference-grid">
+                <table class="reference-table">
+                    <thead>
+                        <tr>
+                            <th>Civil District</th>
+                            <th>CLR District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>District 1</td><td>CLR-D-1, North California</td></tr>
+                        <tr><td>District 2</td><td>CLR-D-1, North California</td></tr>
+                        <tr><td>District 3</td><td>CLR-D-2, East Bay-Area</td></tr>
+                        <tr><td>District 4</td><td>CLR-D-1, North California</td></tr>
+                        <tr><td>District 5</td><td>CLR-D-3, South-East Bay-Area</td></tr>
+                        <tr><td>District 6</td><td>CLR-D-2, East Bay-Area</td></tr>
+                        <tr><td>District 7</td><td>CLR-D-2, East Bay-Area</td></tr>
+                        <tr><td>District 8</td><td>CLR-D-1, North California</td></tr>
+                        <tr><td>District 9</td><td>CLR-D-3, South-East Bay-Area</td></tr>
+                        <tr><td>District 10</td><td>CLR-D-2, East Bay-Area</td></tr>
+                        <tr><td>District 11</td><td>CLR-D-4, South San-Francisco</td></tr>
+                        <tr><td>District 12</td><td>CLR-D-2, East Bay-Area</td></tr>
+                        <tr><td>District 13</td><td>CLR-D-5, Central California</td></tr>
+                        <tr><td>District 14</td><td>CLR-D-3, South-East Bay-Area</td></tr>
+                        <tr><td>District 15</td><td>CLR-D-4, South San-Francisco</td></tr>
+                        <tr><td>District 16</td><td>CLR-D-4, South San-Francisco</td></tr>
+                        <tr><td>District 17</td><td>CLR-D-3, South-East Bay-Area</td></tr>
+                        <tr><td>District 18</td><td>CLR-D-5, Central California</td></tr>
+                    </tbody>
+                </table>
+                <table class="reference-table">
+                    <thead>
+                        <tr>
+                            <th>Civil District</th>
+                            <th>CLR District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>District 19</td><td>CLR-D-4, South San-Francisco</td></tr>
+                        <tr><td>District 20</td><td>CLR-D-5, Central California</td></tr>
+                        <tr><td>District 21</td><td>CLR-D-5, Central California</td></tr>
+                        <tr><td>District 22</td><td>CLR-D-5, Central California</td></tr>
+                        <tr><td>District 23</td><td>CLR-D-8, North-East Los-Angeles</td></tr>
+                        <tr><td>District 24</td><td>CLR-D-6, North-Coast Los-Angeles</td></tr>
+                        <tr><td>District 25</td><td>CLR-D-11, South-East California</td></tr>
+                        <tr><td>District 26</td><td>CLR-D-6, North-Coast Los-Angeles</td></tr>
+                        <tr><td>District 27</td><td>CLR-D-6, North-Coast Los-Angeles</td></tr>
+                        <tr><td>District 28</td><td>CLR-D-8, North-East Los-Angeles</td></tr>
+                        <tr><td>District 29</td><td>CLR-D-6, North-Coast Los-Angeles</td></tr>
+                        <tr><td>District 30</td><td>CLR-D-7, North Los-Angeles</td></tr>
+                        <tr><td>District 31</td><td>CLR-D-8, North-East Los-Angeles</td></tr>
+                        <tr><td>District 32</td><td>CLR-D-7, North Los-Angeles</td></tr>
+                        <tr><td>District 33</td><td>CLR-D-9, East Los-Angeles</td></tr>
+                        <tr><td>District 34</td><td>CLR-D-8, North-East Los-Angeles</td></tr>
+                        <tr><td>District 35</td><td>CLR-D-9, East Los-Angeles</td></tr>
+                    </tbody>
+                </table>
+                <table class="reference-table">
+                    <thead>
+                        <tr>
+                            <th>Civil District</th>
+                            <th>CLR District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>District 36</td><td>CLR-D-7, North Los-Angeles</td></tr>
+                        <tr><td>District 37</td><td>CLR-D-7, North Los-Angeles</td></tr>
+                        <tr><td>District 38</td><td>CLR-D-9, East Los-Angeles</td></tr>
+                        <tr><td>District 39</td><td>CLR-D-11, South-East California</td></tr>
+                        <tr><td>District 40</td><td>CLR-D-11, South-East California</td></tr>
+                        <tr><td>District 41</td><td>CLR-D-11, South-East California</td></tr>
+                        <tr><td>District 42</td><td>CLR-D-9, East Los-Angeles</td></tr>
+                        <tr><td>District 43</td><td>CLR-D-9, East Los-Angeles</td></tr>
+                        <tr><td>District 44</td><td>CLR-D-10, South-Coast Los-Angeles</td></tr>
+                        <tr><td>District 45</td><td>CLR-D-10, South-Coast Los-Angeles</td></tr>
+                        <tr><td>District 46</td><td>CLR-D-10, South-Coast Los-Angeles</td></tr>
+                        <tr><td>District 47</td><td>CLR-D-10, South-Coast Los-Angeles</td></tr>
+                        <tr><td>District 48</td><td>CLR-D-12, San-Diego Coast</td></tr>
+                        <tr><td>District 49</td><td>CLR-D-12, San-Diego Coast</td></tr>
+                        <tr><td>District 50</td><td>CLR-D-12, San-Diego Coast</td></tr>
+                        <tr><td>District 51</td><td>CLR-D-12, San-Diego Coast</td></tr>
+                        <tr><td>District 52</td><td>CLR-D-12, San-Diego Coast</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
-    <footer>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
         <div class="footer-bottom">
             <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
                 With the help of many others; this entire project, as presented thru this web-page,<br>
-                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: December-2024.</p>
         </div>
     </footer>
 </body>
 </html>
+
