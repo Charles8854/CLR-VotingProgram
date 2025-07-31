@@ -490,7 +490,7 @@ const getholochainclient = (() => {
     return async function() {
         if (!client) {
             try {
-                client = await AppWebsocket.connect();
+                client = await AppWebsocket.connect("ws://localhost:8888");
                 console.log("Connected to Holochain!");
             } catch (err) {
                 console.error("Failed to connect to Holochain backend:", err);
@@ -522,9 +522,12 @@ document.getElementById('registrationForm').addEventListener("submit", async fun
         region: formdata.get("region"),
     };
     console.log("form.data:", payload);    
+         const appInfo = await appWebsocket.appInfo({ installed_app_id: 'CLR-VotingProgram' });
+        console.log("appinfo", appInfo)
+
     try {
         // Fetch app info and cell id
-        const appInfo = await appWebsocket.appInfo({ installed_app_id: 'CLR-VotingProgram' });
+   
 
         // Find cell for zome (may need adjustment depending on your DNA/App setup)
         // Make sure to match the cell info structure

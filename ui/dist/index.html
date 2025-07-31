@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CommonlawRepublic-USA</title>
+  <style>
+    /* Root Variables and Basic Reset */
+    :root {
+      --primary-dark: #000000;
+      --secondary-dark: #111111;
+      --tertiary-dark: #1a1a1a;
+      --accent-gold: #f5d442;
+      --accent-gold-hover: #ffe97f;
+      --text-light: #ffffcc;
+      --text-white: #fefefe;
+      --highlight-pink: #ff33e3;
+      --border-color: #444;
+      --shadow-color: rgba(255, 215, 0, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Times New Roman", Times, serif;
+      background-color: var(--primary-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      font-size: 1.2rem; /* Increased from default 1rem */
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    /* Header Styles */
+    .main-header {
+      background-color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent-gold);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-title {
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .header-title h1 {
+      font-size: 3.2rem; /* Increased from 2.7rem */
+      margin: 0;
+      color: #ffffff;
+    }
+
+    /* Navigation Styles */
+    .topnav {
+      background-color: var(--secondary-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      color: var(--accent-gold);
+      padding: 0.8rem 1.2rem;
+      font-size: 1.1rem; /* Increased from 1rem */
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .dropbtn:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--tertiary-dark);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      z-index: 1;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 14px 18px; /* Increased from 12px 16px */
+      display: block;
+      text-align: left;
+      font-size: 1.05rem; /* Added explicit font size */
+    }
+
+    .dropdown-content .long-item {
+      white-space: normal;
+      line-height: 1.2;
+      padding: 10px 18px; /* Increased from 8px 16px */
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--secondary-dark);
+      color: var(--accent-gold);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Container Styles */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.1rem;
+    }
+
+    /* Content Section Styles */
+    .content-section {
+      background-color: var(--secondary-dark);
+      margin: 0.1rem 0;
+      padding: 0.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Front Page Specific Styles */
+    .welcome-content {
+      padding: 0.1rem;
+    }
+
+    .welcome-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-top: 0rem;
+      padding-bottom: 1rem;
+    }
+
+    .welcome-line {
+      font-size: 2.2rem; /* Increased from 1.8rem */
+      color: var(--accent-gold);
+      font-weight: bold;
+      line-height: 1.2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .welcome-text {
+      font-size: 1.5rem; /* Increased from 1.2rem */
+      color: var(--text-light);
+      font-weight: 500;
+      line-height: 1.2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .welcome-block > div:nth-child(2) {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Map Styles */
+    .map-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 0.5rem 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .responsive-map {
+      max-width: 80%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .responsive-map:hover {
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .registration-cta {
+      padding: 2rem;
+    }
+
+    .registration-cta h3 {
+      font-size: 1.9rem; /* Increased from 1.6rem */
+      margin-bottom: 1.5rem;
+    }
+
+    .registration-cta p {
+      font-size: 1.3rem; /* Increased from 1.1rem */
+      line-height: 1.8;
+    }
+
+    /* Footer Styles */
+    .main-footer {
+      background-color: var(--secondary-dark);
+      padding: 1rem;
+      margin-top: 1rem;
+      border-top: 2px solid var(--border-color);
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .footer-section {
+      padding: 0.2rem;
+      margin-bottom: 0.2rem;
+      text-align: center;
+    }
+
+    .footer-section p {
+      margin-bottom: 0.2rem;
+      line-height: 1.4;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.4rem; /* Increased significantly */
+    }
+
+    .footer-section p.mt-1 {
+      margin-top: 0.2rem;
+    }
+
+    .footer-section:hover {
+      background-color: var(--tertiary-dark);
+      transition: background-color 0.3s ease;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-bottom p {
+      font-size: 1.3rem; /* Increased significantly */
+    }
+
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+
+    .mt-1 { margin-top: 1rem; }
+    .mt-2 { margin-top: 2rem; }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      body {
+        font-size: 2rem; /* Slightly smaller on mobile but still larger than original */
+      }
+
+      .topnav {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .dropdown {
+        width: 100%;
+        margin: 0;
+      }
+
+      .dropbtn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.05rem; /* Adjusted for mobile */
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: relative;
+      }
+
+      .dropdown-content a {
+        font-size: 1rem; /* Adjusted for mobile */
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+
+      .header-title h1 {
+        font-size: 2.4rem; /* Increased from 2rem */
+      }
+
+      .welcome-line {
+        font-size: 1.7rem; /* Increased from 1.4rem */
+      }
+
+      .welcome-text {
+        font-size: 1.2rem; /* Increased from 1rem */
+      }
+
+      .map-container {
+        padding: 0.5rem 0;
+      }
+      
+      .responsive-map {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->  
+  <header class="main-header">
+    <div class="header-title">
+      <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+    </div>
+
+    <nav class="topnav">
+      <div class="dropdown">
+        <button class="dropbtn">Home Page.</button>
+        <div class="dropdown-content">
+          <a href="index.html">Home Page.</a>
+          <a href="./Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+          <a href="./Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Register; or: Log-In.</button>
+        <div class="dropdown-content">
+          <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+          <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
+          <a href="./Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+          <a href="./Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+        <div class="dropdown-content">
+          <a href="./USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+          <a href="./USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+          <a href="./USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+          <a href="./USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
+          <a href="./USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+        <div class="dropdown-content" style="text-align:center;">
+          <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
+          <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
+          <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
+          <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
+          <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
+          <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">06: Florida-Georgia</a>
+          <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">07: Mississippi-Valley</a>
+          <a href="./USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" value="usa-08">08: NorthCentral-Plains</a>
+          <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
+          <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
+          <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
+          <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">12: California</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">EveryThing Else:</button>
+        <div class="dropdown-content">
+          <a href="./EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+          <a href="./EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities.</a>
+          <a href="./EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations.</a>
+          <a href="./EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+          <a href="./EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Support.</button>
+        <div class="dropdown-content">
+          <a href="./Support/Support.html">Support-Help-Contacts</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    <!-- Welcome Section -->
+    <div class="content-section">
+      <div class="welcome-content text-center">
+        <div class="welcome-block">
+          <div class="welcome-line"><u>Welcome</u> to the Web-Page of</div>
+          <div class="welcome-line">the <u>Organic Body-Politic</u> of "<u>the People of the USA</u>";</div>
+          <div class="welcome-text">"<u>Organized" for</u> Purposes of "<u>Responsible Self-Governing</u>", <u>under</u>:</div>
+          <div class="welcome-text">Traditional Anglo-American & Biblical <u>Principles of Common-Law & Republicanism</u>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="content-section">
+      <div class="map-container text-center">
+        <img 
+          src="/assets/USRepDistricts-Map-2025-CLR-Statutory-Edit5-LowRez-Bj6J9YU7.jpg" 
+          alt="Map of Twelve Super-States" 
+          class="responsive-map"
+        >
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <p>
+          As within the framework of our USA Constitutional "Republican-Model" for "Machinery-of-Government";
+          our map above is used to Organize the Common-Law-Compliant People of the USA 
+          into More Localized "Responsibly Self-Governing Organic Body-Politic Communities".
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <p>
+          These Localized Communities are designed as twelve separate "Free & Independent Super-States";
+          each with their own "Bottom-Up" & Organic Hierarchal Structure,
+          with their self-selected leadership all fully accountable to their local constituencies.
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <p>
+          Please join with us, and choose your level of involvement & commitment.
+        </p>
+        <p class="mt-1">
+          We are a full-time & real-time "Constitutional Convention".
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+        With the help of many others; this entire project, as presented thru this web-page,<br>
+        has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: July-2025.</p>
+    </div>
+  </footer>
+</body>
+</html>
