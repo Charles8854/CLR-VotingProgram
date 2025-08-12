@@ -480,79 +480,13 @@ body {
     
 </main>
 
-
 <script type="module">
-import { AppWebsocket } from 'https://cdn.jsdelivr.net/npm/@holochain/client/+esm';
+import { handleRegistrationSubmit } from './Registration.js';
 
-
-const getholochainclient = (() => {
-    let client;
-    return async function() {
-        if (!client) {
-            try {
-                client = await AppWebsocket.connect("ws://localhost:8888");
-                console.log("Connected to Holochain!");
-            } catch (err) {
-                console.error("Failed to connect to Holochain backend:", err);
-                throw err;
-            }
-        }
-        return client;
-    }
-})();
-
-document.addEventListener("DOMContentLoaded", async function() {
-    await getholochainclient();
-    console.log("donconnected");
-});
-
-// Registration form submit handler
-document.getElementById('registrationForm').addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    // Get the Holochain client
-    const appWebsocket = await getholochainclient();
-
-    // Prepare form data
-    const formdata = new FormData(this);
-    const payload = {
-        name: formdata.get("name"),
-        email: formdata.get("email"),
-        password: formdata.get("password"),
-        region: formdata.get("region"),
-    };
-    console.log("form.data:", payload);    
-         const appInfo = await appWebsocket.appInfo({ installed_app_id: 'CLR-VotingProgram' });
-        console.log("appinfo", appInfo)
-
-    try {
-        // Fetch app info and cell id
-   
-
-        // Find cell for zome (may need adjustment depending on your DNA/App setup)
-        // Make sure to match the cell info structure
-        const cell = appInfo.cell_info["clr_voting_program"][0];
-        const cell_id = cell.provisioned.cell_id;
-
-        // Call Zome function for creating agent profile
-        const result = await appWebsocket.callZome({
-            cap_secret: null,
-            cell_id: cell_id,
-            zome_name: "clr_voting_programy",
-            fn_name: "create_agent_profile",
-            payload: payload,
-            provenance: cell_id[1], // agentPubKey
-            timeout: 10000
-        });
-
-        console.log("Registration successful:", result);
-        alert('Registration successful! Please check your email for confirmation.');
-        // Optionally redirect or show a confirmation
-    } catch (err) {
-        console.error(err);
-        alert('An error occurred during registration. ' + (err.message || ''));
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById('registrationForm').addEventListener("submit", handleRegistrationSubmit);
 });
 </script>
+
 </body>
 </html>

@@ -177,12 +177,29 @@
             border-collapse: collapse;
             color: var(--text-light);
             font-size: 1.3rem;
+            table-layout: fixed; /* This ensures the column widths respect our settings */
         }
 
         .state-list th, .state-list td {
             border-bottom: 1px solid var(--accent-gold);
             padding: 12px 10px;
             text-align: left;
+        }
+
+        /* Column width adjustments */
+        .state-list th:first-child,
+        .state-list td:first-child {
+            width: 54%; /* Increase the width of the first column */
+        }
+        
+        .state-list th:nth-child(2),
+        .state-list td:nth-child(2) {
+            width: 30%; /* Reduce the width of the second column */
+        }
+        
+        .state-list th:nth-child(3),
+        .state-list td:nth-child(3) {
+            width: 16%; /* Reduce the width of the third column */
         }
 
         .state-list th {
@@ -444,7 +461,7 @@
                 <thead>
                     <tr>
                         <th>CommonLaw-Republic<br>US-Rep Districts:</th>
-                        <th>Civil-Gov US-Rep Districts:</th>
+                        <th>Civil-Government US-Rep Districts:</th>
                         <th>Population Estimates:</th>
                     </tr>
                 </thead>
@@ -528,7 +545,7 @@
         <div class="footer-bottom">
             <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
                 With the help of many others; this entire project, as presented thru this web-page,<br>
-                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: December-2024.</p>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: August-2025.</p>
         </div>
     </footer>
 </body>

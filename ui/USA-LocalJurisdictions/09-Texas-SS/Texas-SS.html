@@ -182,12 +182,29 @@
             border-collapse: collapse;
             color: var(--text-light);
             font-size: 1.3rem;
+            table-layout: fixed; /* This ensures the column widths respect our settings */
         }
 
         .state-list th, .state-list td {
             border-bottom: 1px solid var(--accent-gold);
             padding: 12px 10px;
             text-align: left;
+        }
+
+        /* Column width adjustments */
+        .state-list th:first-child,
+        .state-list td:first-child {
+            width: 54%; /* Increase the width of the first column */
+        }
+        
+        .state-list th:nth-child(2),
+        .state-list td:nth-child(2) {
+            width: 30%; /* Reduce the width of the second column */
+        }
+        
+        .state-list th:nth-child(3),
+        .state-list td:nth-child(3) {
+            width: 16%; /* Reduce the width of the third column */
         }
 
         .state-list th {
@@ -217,7 +234,7 @@
             background-color: var(--secondary-dark);
             border-radius: 12px;
             padding: 2rem 1rem;
-            max-width: 800px;
+            max-width: 900px; /* Increased width to better accommodate two columns */
             margin: 2rem auto;
             box-shadow: 0 4px 10px var(--shadow-color);
             border: 1px solid var(--border-color);
@@ -249,6 +266,19 @@
 
         .reference-table tr:hover {
             background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Multi-column reference table layout */
+        .reference-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 2rem; /* Increased gap for better separation */
+        }
+
+        @media screen and (max-width: 768px) { /* Simplified breakpoint */
+            .reference-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Map Styles */
@@ -501,7 +531,7 @@
                 <thead>
                     <tr>
                         <th>CommonLaw-Republic<br>US-Rep Districts:</th>
-                        <th>Civil-Gov US-Rep Districts:</th>
+                        <th>Civil-Government US-Rep Districts:</th>
                         <th>Population Estimates:</th>
                     </tr>
                 </thead>
@@ -581,68 +611,70 @@
 
         <!-- Reference Section -->
         <div class="divider"></div>
-        <h3>District Reference Guide</h3>
-        <p>Find your Civil US-Rep District and corresponding CLR District below:</p>
+        <h3><u>Civil US-Rep-Districts Reference Guide</u>:</h3>
+        <p>Find Your US-Rep CLR-District, From Your US-Rep Civil-District.</p>
         
         <div class="reference-section">
-            <table class="reference-table">
-                <thead>
-                    <tr>
-                        <th>Civil US-Rep District</th>
-                        <th>CLR District</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>District 1</td><td>CLR-D-1, South-East Dallas</td></tr>
-                    <tr><td>District 2</td><td>CLR-D-11, North Houston</td></tr>
-                    <tr><td>District 3</td><td>CLR-D-2, North-East Dallas</td></tr>
-                    <tr><td>District 4</td><td>CLR-D-2, North-East Dallas</td></tr>
-                    <tr><td>District 5</td><td>CLR-D-1, South-East Dallas</td></tr>
-                    <tr><td>District 6</td><td>CLR-D-6, South Dallas</td></tr>
-                    <tr><td>District 7</td><td>CLR-D-9, South-West Houston</td></tr>
-                    <tr><td>District 8</td><td>CLR-D-10, Central-East Texas</td></tr>
-                    <tr><td>District 9</td><td>CLR-D-9, South-West Houston</td></tr>
-                    <tr><td>District 10</td><td>CLR-D-10, Central-East Texas</td></tr>
-                    <tr><td>District 11</td><td>CLR-D-6, South Dallas</td></tr>
-                    <tr><td>District 12</td><td>CLR-D-4, West Texas</td></tr>
-                    <tr><td>District 13</td><td>CLR-D-3, North-West Texas</td></tr>
-                    <tr><td>District 14</td><td>CLR-D-12, South-East Texas</td></tr>
-                    <tr><td>District 15</td><td>CLR-D-8, South-Coast Texas</td></tr>
-                    <tr><td>District 16</td><td>CLR-D-5, South-West Texas</td></tr>
-                    <tr><td>District 17</td><td>CLR-D-10, Central-East Texas</td></tr>
-                    <tr><td>District 18</td><td>CLR-D-11, North Houston</td></tr>
-                    <tr><td>District 19</td><td>CLR-D-4, West Texas</td></tr>
-                </tbody>
-            </table>
-            <table class="reference-table">
-                <thead>
-                    <tr>
-                        <th>Civil US-Rep District</th>
-                        <th>CLR District</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>District 20</td><td>CLR-D-5, South-West Texas</td></tr>
-                    <tr><td>District 21</td><td>CLR-D-7, South-Central Texas</td></tr>
-                    <tr><td>District 22</td><td>CLR-D-9, South-West Houston</td></tr>
-                    <tr><td>District 23</td><td>CLR-D-5, South-West Texas</td></tr>
-                    <tr><td>District 24</td><td>CLR-D-3, North-West Texas</td></tr>
-                    <tr><td>District 25</td><td>CLR-D-4, West Texas</td></tr>
-                    <tr><td>District 26</td><td>CLR-D-3, North-West Texas</td></tr>
-                    <tr><td>District 27</td><td>CLR-D-8, South-Coast Texas</td></tr>
-                    <tr><td>District 28</td><td>CLR-D-7, South-Central Texas</td></tr>
-                    <tr><td>District 29</td><td>CLR-D-12, South-East Texas</td></tr>
-                    <tr><td>District 30</td><td>CLR-D-1, South-East Dallas</td></tr>
-                    <tr><td>District 31</td><td>CLR-D-6, South Dallas</td></tr>
-                    <tr><td>District 32</td><td>CLR-D-2, North-East Dallas</td></tr>
-                    <tr><td>District 33</td><td>CLR-D-4, West Texas</td></tr>
-                    <tr><td>District 34</td><td>CLR-D-8, South-Coast Texas</td></tr>
-                    <tr><td>District 35</td><td>CLR-D-7, South-Central Texas</td></tr>
-                    <tr><td>District 36</td><td>CLR-D-12, South-East Texas</td></tr>
-                    <tr><td>District 37</td><td>CLR-D-7, South-Central Texas</td></tr>
-                    <tr><td>District 38</td><td>CLR-D-11, North Houston</td></tr>
-                </tbody>
-            </table>
+            <div class="reference-grid">
+                <table class="reference-table">
+                    <thead>
+                        <tr>
+                            <th>Civil District</th>
+                            <th>CLR District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>District 1</td><td>CLR-D-1, South-East Dallas</td></tr>
+                        <tr><td>District 2</td><td>CLR-D-11, North Houston</td></tr>
+                        <tr><td>District 3</td><td>CLR-D-2, North-East Dallas</td></tr>
+                        <tr><td>District 4</td><td>CLR-D-2, North-East Dallas</td></tr>
+                        <tr><td>District 5</td><td>CLR-D-1, South-East Dallas</td></tr>
+                        <tr><td>District 6</td><td>CLR-D-6, South Dallas</td></tr>
+                        <tr><td>District 7</td><td>CLR-D-9, South-West Houston</td></tr>
+                        <tr><td>District 8</td><td>CLR-D-10, Central-East Texas</td></tr>
+                        <tr><td>District 9</td><td>CLR-D-9, South-West Houston</td></tr>
+                        <tr><td>District 10</td><td>CLR-D-10, Central-East Texas</td></tr>
+                        <tr><td>District 11</td><td>CLR-D-6, South Dallas</td></tr>
+                        <tr><td>District 12</td><td>CLR-D-4, West Texas</td></tr>
+                        <tr><td>District 13</td><td>CLR-D-3, North-West Texas</td></tr>
+                        <tr><td>District 14</td><td>CLR-D-12, South-East Texas</td></tr>
+                        <tr><td>District 15</td><td>CLR-D-8, South-Coast Texas</td></tr>
+                        <tr><td>District 16</td><td>CLR-D-5, South-West Texas</td></tr>
+                        <tr><td>District 17</td><td>CLR-D-10, Central-East Texas</td></tr>
+                        <tr><td>District 18</td><td>CLR-D-11, North Houston</td></tr>
+                        <tr><td>District 19</td><td>CLR-D-4, West Texas</td></tr>
+                    </tbody>
+                </table>
+                <table class="reference-table">
+                    <thead>
+                        <tr>
+                            <th>Civil District</th>
+                            <th>CLR District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>District 20</td><td>CLR-D-5, South-West Texas</td></tr>
+                        <tr><td>District 21</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 22</td><td>CLR-D-9, South-West Houston</td></tr>
+                        <tr><td>District 23</td><td>CLR-D-5, South-West Texas</td></tr>
+                        <tr><td>District 24</td><td>CLR-D-3, North-West Texas</td></tr>
+                        <tr><td>District 25</td><td>CLR-D-4, West Texas</td></tr>
+                        <tr><td>District 26</td><td>CLR-D-3, North-West Texas</td></tr>
+                        <tr><td>District 27</td><td>CLR-D-8, South-Coast Texas</td></tr>
+                        <tr><td>District 28</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 29</td><td>CLR-D-12, South-East Texas</td></tr>
+                        <tr><td>District 30</td><td>CLR-D-1, South-East Dallas</td></tr>
+                        <tr><td>District 31</td><td>CLR-D-6, South Dallas</td></tr>
+                        <tr><td>District 32</td><td>CLR-D-2, North-East Dallas</td></tr>
+                        <tr><td>District 33</td><td>CLR-D-4, West Texas</td></tr>
+                        <tr><td>District 34</td><td>CLR-D-8, South-Coast Texas</td></tr>
+                        <tr><td>District 35</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 36</td><td>CLR-D-12, South-East Texas</td></tr>
+                        <tr><td>District 37</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 38</td><td>CLR-D-11, North Houston</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 
@@ -651,7 +683,7 @@
         <div class="footer-bottom">
             <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
                 With the help of many others; this entire project, as presented thru this web-page,<br>
-                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: December-2024.</p>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: August-2025.</p>
         </div>
     </footer>
 </body>

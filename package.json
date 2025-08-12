@@ -27,5 +27,8 @@
   },
   "hcScaffold": {
     "template": "vanilla"
+  },
+  "dependencies": {
+    "@holochain/client": "^0.19.2"
   }
 }

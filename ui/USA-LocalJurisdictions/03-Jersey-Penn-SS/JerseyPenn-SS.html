@@ -17,6 +17,8 @@
             --highlight-pink: #ff33e3;
             --border-color: #444;
             --shadow-color: rgba(255, 215, 0, 0.2);
+            --separator-color: #cc4444; /* Clean, classic light red */
+            --yellow-separator: #e6c200; /* Yellow for mini-state separators */
         }
 
         * {
@@ -32,7 +34,7 @@
             background-color: var(--primary-dark);
             color: var(--text-light);
             line-height: 1.6;
-            font-size: 1.2rem;
+            font-size: 1.38rem;
         }
 
         /* Typography */
@@ -42,7 +44,7 @@
         }
 
         h2 {
-            font-size: 2.2rem;
+            font-size: 2.35rem;
         }
 
         a {
@@ -56,17 +58,17 @@
         }
 
         p {
-            font-size: 1.4rem;
+            font-size: 1.61rem;
             margin-bottom: 1rem;
         }
 
         /* New subtitle class */
         .subtitle {
-            font-size: 1.6rem;
+            font-size: 1.84rem;
             color: var(--accent-gold);
             margin-top: -0.5rem;
             margin-bottom: 1.5rem;
-            font-weight: bold;
+            font-weight: 900;
         }
 
         /* Header Styles */
@@ -172,30 +174,62 @@
             border: 1px solid var(--border-color);
         }
 
+        /* Simplified table styling - no automatic borders */
         .state-list table {
             width: 100%;
             border-collapse: collapse;
             color: var(--text-light);
-            font-size: 1.3rem;
+            font-size: 1.5rem;
+            table-layout: fixed;
         }
 
         .state-list th, .state-list td {
-            border-bottom: 1px solid var(--accent-gold);
             padding: 12px 10px;
             text-align: left;
         }
 
+        /* Column width adjustments */
+        .state-list th:first-child,
+        .state-list td:first-child {
+            width: 52%;
+        }
+        
+        .state-list th:nth-child(2),
+        .state-list td:nth-child(2) {
+            width: 32%;
+        }
+        
+        .state-list th:nth-child(3),
+        .state-list td:nth-child(3) {
+            width: 16%;
+        }
+
+        /* Header row styling - no border, clean background */
         .state-list th {
             background-color: var(--tertiary-dark);
             color: var(--accent-gold);
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.6rem;
+            font-weight: 900;
+        }
+
+        /* Red separator row styling for major section breaks */
+        .table-separator td {
+            height: 1px;
+            padding: 0;
+            background-color: var(--separator-color);
+        }
+
+        /* Yellow separator row styling for mini-state divisions */
+        .yellow-separator td {
+            height: 1px;
+            padding: 0;
+            background-color: var(--yellow-separator);
         }
 
         .state-list td a {
             color: var(--accent-gold);
             text-decoration: underline;
-            font-weight: bold;
+            font-weight: 900;
             font-size: 1.3rem;
         }
 
@@ -203,9 +237,6 @@
             color: var(--accent-gold-hover);
         }
 
-        .state-list tr:last-child td {
-            border-bottom: none;
-        }
 
         /* Map Styles */
         .map-container {
@@ -217,7 +248,7 @@
         }
 
         .responsive-map1 {
-            min-width: 33%;
+            min-width: 40%;
             max-width: 90%;
             height: auto;
             display: block;
@@ -228,7 +259,7 @@
 
         .responsive-map2 {
             min-width: 40%;
-            max-width: 70%;
+            max-width: 90%;
             height: auto;
             display: block;
             margin: 0 auto;
@@ -237,8 +268,8 @@
         }
 
         .responsive-map3 {
-            min-width: 25%;
-            max-width: 70%;
+            min-width: 40%;
+            max-width: 90%;
             height: auto;
             display: block;
             margin: 0 auto;
@@ -351,7 +382,7 @@
                 font-size: 1.2rem;
             }
 
-            .responsive-map1, .responsive-map2, .responsive-map3 {
+            .responsive-map1, .responsive-map2, .responsive-map3, .responsive-map4 {
                 max-width: 95%;
             }
             
@@ -440,34 +471,28 @@
 
     <!-- Main Content Area -->
     <main class="main-content">
-        <h2>As <u>With-In This</u>: "<u>Jersey-Penn CLR-Super-State</u>":</h2>
-        <p class="subtitle">below are Links & Information About our<br>
-        <u>Twelve Individual</u> "<u>Common-Law Republic Mini-States</u>":</p>
+        <h2><u>As With-In This</u>:<br>
+        "<u>Jersey-Penn CLR-Super-State</u>":</h2>
+        <p class="subtitle"><u>Below Are Listed Details About our</u><br>
+        Twelve Politically-Sub-Divided & Individual<br>
+        "<u>Common-Law Republic Mini-States</u>":</p>
         
         <p><u>Total Jersey-Penn Super-State's "Population</u>" Included Here-In: <u>23,350,610</u>.<br>
         <u>Total "US-Civil-Government Representatives-Districts</u>" Included Here-In: <u>39</u>.</p>
-        
-        <p>Here-under; "<u>Essential Principles" of "Common-Law Republicanism</u>", <u>Mandate</u>, that: 
-        Our Smaller-Communities become <u>Organized for "Responsible Self-Governing</u>"; 
-        all of which Requires Our Vigilantly "Keeping the Peace", "Administering Justice", 
-        Conducting Regular "Political-Polling Process", 
-        & "Promptly Paying All of Our Legitimate Commercial-Debts".</p>
-        
-        <p><u>For These in Essential Organic/Constitutional Purposes</u>, 
-        our CLR-Leadership has <u>Re-Assigned 
-        the Below Listed 39 US-Civil-Government Representatives-Districts</u>, 
-        <u>in-to Twelve Individual Common-Law Republic Mini-States Districts</u>; 
-        as follows:</p>
-
+       
         <div class="state-list">
             <table>
                 <thead>
                     <tr>
                         <th>CommonLaw-Republic<br>US-Rep Districts:</th>
-                        <th>Civil-Gov US-Rep Districts:</th>
+                        <th>Civil-Government US-Rep Districts:</th>
                         <th>Population Estimates:</th>
                     </tr>
                 </thead>
+                    <!-- Header Separator Row -->
+                    <tr class="table-separator">
+                        <td colspan="3"></td>
+                    </tr>
                 <tbody>
                     <tr>
                         <td><a href="./Washington-DC/index.html">CLR-D-1, Washington-DC</a></td>
@@ -533,10 +558,21 @@
             </table>
         </div>
 
+        <p>"<u>Essential Principles" of "Common-Law Republicanism</u>", <u>Require</u>, that:<br>
+        <u>All Smaller-Communities</u>, <u>become</u>: <u>Organized for "Responsible Self-Governing</u>";<br>
+        <u>all of which</u>, here-under, <u>Mandate</u> Our Vigilantly Engaging In<br>
+        <u>Regular "Political-Polling Process</u>", "Administering Justice", "Keeping the Peace";<br>
+        & "Paying All of Our Legitimate Commercial-Debts".</p>
+
+        <p><u>In Pursuit of These Essential Organic/Constitutional Purposes</u>, our CLR-Leadership has<br>
+        <u>Re-Assigned</u> the Above Listed 39 <u>US-Civil-Government Representatives-Districts</u>,<br>
+        <u>in-to</u> the Twelve Above Listed & Individually Sovereign<br>
+        <u>Common-Law Republic Mini-State Districts</u>.</p>
+
         <!-- Map Section -->
         <div class="map-container">
             <img 
-                src="./Pennsylvania/Pennsylvania-Map-USReps-CivilDistrictss.png" 
+                src="./Pennsylvania/Pennsylvania-Map-USReps-CivilDistricts.png" 
                 alt="Map of Pennsylvania US-Civil-Reps-Districts" 
                 class="responsive-map1"
             >
@@ -545,7 +581,7 @@
         <!-- Map Section -->
         <div class="map-container">
             <img 
-                src="./Maryland/Maryland-Map-USReps-CivilDistrictss.png" 
+                src="./Maryland/Maryland-Map-USReps-CivilDistricts.png" 
                 alt="Map of Maryland US-Civil-Reps-Districts" 
                 class="responsive-map2"
             >
@@ -554,7 +590,7 @@
         <!-- Map Section -->
         <div class="map-container">
             <img 
-                src="./NewJersey/NewJersey-Map-USReps-CivilDistrictss.png" 
+                src="./NewJersey/NewJersey-Map-USReps-CivilDistricts.png" 
                 alt="Map of New-Jersey US-Civil-Reps-Districts" 
                 class="responsive-map3"
             >
@@ -566,7 +602,7 @@
         <div class="footer-bottom">
             <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
                 With the help of many others; this entire project, as presented thru this web-page,<br>
-                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: December-2024.</p>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: August-2025.</p>
         </div>
     </footer>
 </body>
